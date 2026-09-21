@@ -11,18 +11,26 @@ description: Use when turning a transcript, recording notes, PDF minutes, or mes
 
 | 文件 | 用途 |
 |---|---|
-| `meetings/YYYY/YYYY-MM-DD-<slug>.md` | 单场纪要 |
-| `meetings/action-items.md` | 跨会行动项总账 |
-| `meetings/decision-log.md` | 跨会决策总账 |
+| `meetings/YYYY/YYYY-MM-DD-<slug>.docx` 及同名 `.pdf` | 单场纪要（发给同事用 Word/PDF，不要交 markdown） |
+| `meetings/POA生物制品项目改造-行动项跟踪.xlsx` | 跨会行动项总账。格式以用户确认的单表「行动项总账」为准 |
+| `meetings/decision-log.md` | 内部决策备忘，不作为对外交付 |
 
-已有 PDF/录音文字时，先抽取原文再写纪要，原文与纪要分开存放：`meetings/YYYY/YYYY-MM-DD-<slug>.source.md`。
+已有 PDF/录音文字时，先抽取原文再写纪要。
+
+## 行动项 Excel 格式（必须遵守）
+
+- 只维护一张工作表：`行动项总账`。不要再加「总览 / 会议快照 / 使用说明」。
+- 列：ID、提出日、提出方、片断 / 专业、行动项、验收标准、负责人、截止日期、状态、优先级、进展日志（只追加）、更新日、来源会议。
+- **禁止**在单元格上加 Excel 批注 / 注释 / Note（含随单元格移动、鼠标移到栏目才弹出的黄框）。需要说明的内容写进「进展日志」，不要挂在格子上。
+- **禁止**给数据验证加输入提示（`prompt` / `promptTitle` / `showInputMessage`）。下拉列表可以留，点进格子时不要弹出说明。
+- 以后新增或改行动项，都按上述规则，不要把批注加回来。
 
 ## 步骤
 
 1. **识别会议类型**：内部部署 / 客户例会 / 技术对齐 / 质量-法规 / 商务。类型只影响话题写法，不改变总结构。
 2. **抽事实**：出席、时间、议程、原话级决定、点名任务、未决问题。缺出席名单就写「纪要未列全，待补」。
 3. **写单场纪要**（用下面模板，章节顺序不要改）。
-4. **回写总账**：新行动项追加到 `meetings/action-items.md`；已有项只更新状态，不另开一行。决策同样回写 `decision-log.md`。
+4. **回写总账**：新行动项追加到 `meetings/POA生物制品项目改造-行动项跟踪.xlsx` 的「行动项总账」；已有项只更新状态，不另开一行，也不加批注。决策可记入 `decision-log.md`。
 5. **会后确认稿**：用 `client-comms` 出一封可发给客户或内部的短确认（中文，必要时中英对照）。
 6. **翻译**：对外稿调用 `cn-en-regulatory-translation`，不要在纪要里即兴改术语。
 
@@ -81,13 +89,9 @@ description: Use when turning a transcript, recording notes, PDF minutes, or mes
 
 ## 总账列
 
-`meetings/action-items.md` 使用：
+以 Excel「行动项总账」表头为准。状态用中文：`未开始 | 进行中 | 阻塞 | 已完成 | 取消`。
 
-`ID | 行动 | 责任人 | 截止日期 | 优先级 | 状态 | 来源会议 | 验收标准 | 最新进展 | 更新日`
-
-状态枚举：`Open | In progress | Blocked | Done | Cancelled`。
-
-每次更新在「最新进展」写一句，并改「更新日」。不要删历史 Done 行，可折到文件底部「已关闭」。
+每次更新在「进展日志」追加一行 `YYYY-MM-DD：…`，并改「更新日」。不要删已完成行，用筛选看未关闭。
 
 ## 红线
 

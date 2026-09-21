@@ -12,4 +12,4 @@ Before drafting client emails, translations, slides, minutes, or action items, r
 - Meeting minutes, decisions, action tracking → `meeting-minutes-and-actions`
 - PowerPoint / 汇报材料 → `presentation-deck` and `theme-factory`
 
-Write minutes into `meetings/`. Write decks into `deliverables/pptx/`. Mark unverified facts as 待核实. Do not invent regulatory conclusions or unauthorized commitments.
+Write minutes into `meetings/` as Word/PDF. Track actions only in `meetings/POA生物制品项目改造-行动项跟踪.xlsx` (single sheet 行动项总账). Never add Excel cell comments/notes or data-validation input popups. Write decks into `deliverables/pptx/`. Mark unverified facts as 待核实. Do not invent regulatory conclusions or unauthorized commitments.
