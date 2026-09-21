@@ -12,7 +12,7 @@ description: Use when turning a transcript, recording notes, PDF minutes, or mes
 | 文件 | 用途 |
 |---|---|
 | `meetings/YYYY/YYYY-MM-DD-<slug>.docx` 及同名 `.pdf` | 单场纪要（发给同事用 Word/PDF，不要交 markdown） |
-| `meetings/POA生物制品项目改造-行动项跟踪.xlsx` | 跨会行动项总账。格式以用户确认的单表「行动项总账」为准 |
+| `meetings/BLA改造行动项跟踪.xlsx` | 跨会行动项总账。格式以用户确认的单表「行动项总账」为准 |
 | `meetings/decision-log.md` | 内部决策备忘，不作为对外交付 |
 
 已有 PDF/录音文字时，先抽取原文再写纪要。
@@ -30,7 +30,7 @@ description: Use when turning a transcript, recording notes, PDF minutes, or mes
 1. **识别会议类型**：内部部署 / 客户例会 / 技术对齐 / 质量-法规 / 商务。类型只影响话题写法，不改变总结构。
 2. **抽事实**：出席、时间、议程、原话级决定、点名任务、未决问题。缺出席名单就写「纪要未列全，待补」。
 3. **写单场纪要**（用下面模板，章节顺序不要改）。
-4. **回写总账**：新行动项追加到 `meetings/POA生物制品项目改造-行动项跟踪.xlsx` 的「行动项总账」；已有项只更新状态，不另开一行，也不加批注。决策可记入 `decision-log.md`。
+4. **回写总账**：新行动项追加到 `meetings/BLA改造行动项跟踪.xlsx` 的「行动项总账」；已有项只更新状态，不另开一行，也不加批注。决策可记入 `decision-log.md`。
 5. **会后确认稿**：用 `client-comms` 出一封可发给客户或内部的短确认（中文，必要时中英对照）。
 6. **翻译**：对外稿调用 `cn-en-regulatory-translation`，不要在纪要里即兴改术语。
 

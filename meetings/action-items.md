@@ -1,6 +1,6 @@
 # 行动项总账
 
-主文件：`meetings/POA生物制品项目改造-行动项跟踪.xlsx`（持续更新）。本表只作目录，避免两处各改各的。
+主文件：`meetings/BLA改造行动项跟踪.xlsx`（持续更新）。本表只作目录，避免两处各改各的。
 
 状态：`Open | In progress | Blocked | Done | Cancelled`
 

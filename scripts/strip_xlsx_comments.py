@@ -35,7 +35,7 @@ def strip_comments(path: Path) -> int:
 
 def main() -> None:
     src = Path(sys.argv[1] if len(sys.argv) > 1 else "meetings/POA生物制品项目改造-行动项跟踪 (1).xlsx")
-    dest = Path(sys.argv[2] if len(sys.argv) > 2 else "meetings/POA生物制品项目改造-行动项跟踪.xlsx")
+    dest = Path(sys.argv[2] if len(sys.argv) > 2 else "meetings/BLA改造行动项跟踪.xlsx")
     removed = strip_comments(src)
     if dest.resolve() != src.resolve():
         shutil.copy2(src, dest)
