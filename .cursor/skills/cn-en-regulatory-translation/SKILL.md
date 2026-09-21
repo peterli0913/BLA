@@ -22,7 +22,7 @@ description: Use when translating or bilingual-editing CMC, BLA, CDMO, inspectio
 1. **定读者和用途**（邮件 / 纪要 / 幻灯 / 模块正文）。
 2. **扫术语**：专有名词、产品代码、法规名先对照 glossary；没有的先标「待核实」再译。
 3. **整句翻译**：保持逻辑，不逐词对译；被动语态在中文里改成责任人清晰的主动句，英文保持 US regulatory English。
-4. **不翻译的留下原文**：BLA、CMC、CTD、eCTD、PPQ、CQA、CPP、ICH、FDA、NMPA、Asymchem，以及客户产品代码（如 POA，含义待核实）。
+4. **不翻译的留下原文**：BLA、CMC、CTD、eCTD、PPQ、CQA、CPP、ICH、FDA、NMPA、Asymchem、AFD，以及客户产品代码（如 POA，含义待核实）。设备俗称先查 glossary「设备与工艺装备」。
 5. **对照检查**：数字、单位、批号、日期、否定词、范围（in-process vs release）是否两边一致。
 6. **输出**：正文 + 文末「术语/待核实」列表。不要只丢译文。
 
@@ -46,6 +46,7 @@ description: Use when translating or bilingual-editing CMC, BLA, CDMO, inspectio
 | 变更 | change | change control / variation（按体系） |
 | 验证 | verify | qualification / validation / verification（按对象） |
 | 客户 | customer | client / sponsor（申报语境常用 sponsor） |
+| 三合一 | three-in-one / 3-in-1 | agitated filter dryer (AFD) |
 
 ## 交付格式
 

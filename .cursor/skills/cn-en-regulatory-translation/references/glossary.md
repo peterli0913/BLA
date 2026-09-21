@@ -1,6 +1,8 @@
 # BLA / CDMO 中英术语表
 
-先用本表，再查 ICH/FDA/NMPA 官方用语。项目特有代码以客户材料为准，不确定标「待核实」。
+先用本表，再查 ICH/FDA/NMPA 官方用语。**用户指定的译法优先于通用译法。** 项目特有代码以客户材料为准，不确定标「待核实」。
+
+继续补充时直接说：`中文 = 英文（备注可选）`。新词写入「设备与工艺装备」或对应分类，不另开同义词行。
 
 ## 组织与项目
 
@@ -80,6 +82,14 @@
 | 补充申请 | supplement / PAS / CBE | 按变更类别 |
 | 指导原则 | guidance | |
 | 药典 | pharmacopeia (USP/EP/ChP) | |
+
+## 设备与工艺装备（项目指定优先）
+
+口译、纪要、PPT、邮件一律用本栏。不要按字面翻译设备俗称。
+
+| 中文 | English | 备注 |
+|---|---|---|
+| 三合一 | agitated filter dryer (AFD) | 用户指定。不要写成 three-in-one。首次出现：AFD（agitated filter dryer）；后文 AFD。客户若写 ANFD（agitated Nutsche filter dryer）可并存，对外默认 AFD |
 
 ## 会议与项目管理（对外稿）
 
