@@ -10,6 +10,5 @@ bash scripts/install-skill-runtime.sh
 
 ## 本周产出
 
-- 纪要：[`meetings/2026/2026-09-21-poa-deployment.md`](meetings/2026/2026-09-21-poa-deployment.md)
+- 纪要（修订 Word / PDF）：[`meetings/2026/2026-09-21-BLA改造沟通会会议纪要-修订.docx`](meetings/2026/2026-09-21-BLA改造沟通会会议纪要-修订.docx) · [`PDF`](meetings/2026/2026-09-21-BLA改造沟通会会议纪要-修订.pdf)
 - 行动项跟踪：[`meetings/POA生物制品项目改造-行动项跟踪.xlsx`](meetings/POA生物制品项目改造-行动项跟踪.xlsx)
-- 另一项目模板（仅作样式参考，不要当本项目主账）：[`行动项跟踪-0921-0928.xlsx`](行动项跟踪-0921-0928.xlsx)
