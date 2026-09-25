@@ -222,14 +222,14 @@ def add_page_number(paragraph):
 RUN_SHEET = [
     ["1", "0:00–0:04", "4", "开场、议程、Tracker 总体状态\nOpening, agenda, overall status",
      "Tracker（EN）首屏 / 筛选状态列", "全部"],
-    ["2", "0:04–0:19", "15", "Tracker 重点项（4 个主题）\nKey tracker items (4 themes)",
-     "Tracker（EN），按主题跳行", "A: 2, 38, 44, 35, 13, 12, 29, 42, 43\nB: 37, 5, 54, 9, 34, 36, 7, 4, 6\nC: 10, 22, 23, 30, 45, 46\nD: 20, 21, 24, 32, 27, 28, 49"],
+    ["2", "0:04–0:19", "15", "Tracker 重点项（4 个主题，按 P 列分组、组内按行号）\nKey tracker items (4 themes)",
+     "Tracker（EN），按 P 列筛选", "A 清洁: 2, 12, 13, 29, 34, 35, 38, 42, 43, 44\nB 设备改造: 5, 6, 7, 36, 37, 54, 55\nC 物流通道 + CNC 湿度: 10, 22, 23, 30\nD 钝化 / CCS / 过滤: 20, 21 / 24, 32 / 27, 28, 49"],
     ["3", "0:19–0:26", "7", "湿氮气装置使用策略 + 2D/3D 确认\nHumidified N2 strategy + 2D/3D",
      "Humidified_Nitrogen_..._EN.pptx 第 1–3 页", "37, 54"],
     ["4", "0:26–0:34", "8", "纯水使用方案 + PPQ 后改造提议\nPurified water plan + post-PPQ proposal",
-     "Purified_Water_Use_Plan_EN.pptx 第 1–6 页", "11, 25, 26, 33, 39, 40, 41, 47, 52"],
-    ["5", "0:34–0:40", "6", "其余项快速过（已完成 / 文件类 / 小项）\nRemaining items – quick run-through",
-     "Tracker（EN）", "3, 15–19, 8, 14, 31, 50, 51, 53, 55, 56, 48"],
+     "Purified_Water_Use_Plan_EN.pptx 第 1–6 页", "纯水 PW: 11, 25, 26, 39（第 5 页）/ 33, 40, 41, 52（第 6 页）/ 47"],
+    ["5", "0:34–0:40", "6", "其余项快速过（按 P 列：DIPEA、其他）\nRemaining items by category",
+     "Tracker（EN），按 P 列筛选", "DIPEA: 15, 16, 17, 18, 19\n其他 Other: 3, 4, 8, 9, 14, 31, 45, 46, 48, 50, 51, 53, 56"],
     ["6", "0:40–0:45", "5", "待礼来确认的问题 + 下一步\nDecisions needed + next steps",
      "本讲稿第四部分（可直接共享）", "—"],
 ]
@@ -239,7 +239,7 @@ CHECKLIST = [
     ["2", "纯水 8 项：Tracker 与纯水 PPT 日期先统一（参考《纯水日期对齐_Tracker与PPT对照_09-25-2026.xlsx》），会上只讲一套日期", "□"],
     ["3", "决定是否向礼来说明“访问后新增罐改造 → 整体计划重排”（讲稿第 2 段有一句可选话术，标了［可选］）", "□"],
     ["4", "打开并按顺序排好：Tracker（EN）→ 湿氮气 PPT（EN）→ 纯水 PPT（EN）→ 本讲稿第四部分", "□"],
-    ["5", "Tracker 建议先按“Priority”或主题筛选好，减少会上翻找；隐藏列 A（Number）如需报 Item 号可临时显示", "□"],
+    ["5", "Tracker 按 P 列（Asymchem Internal Category）筛选，讲到哪个主题切到哪个分类，组内按行号往下走；隐藏列 A（Number）如需报 Item 号可临时显示", "□"],
     ["6", "请工程（坡度、2D/3D、隔膜阀）、纯水、QA（清洗验证）同事会上待命，追问时可请其补充", "□"],
 ]
 
@@ -261,61 +261,83 @@ SEG1 = [
 ]
 
 SEG2 = [
-    ("§主题 A：清洗验证与清洁（约 4 分钟）", "§Theme A: Cleaning validation and cleaning (about 4 min)"),
-    ("第一项是清洗验证策略（第 2 行 / Item 1）。我们按步骤提交：Step 1 在 10/03，Step 2 在 10/20，Step 3A 在 11/09，Step 3B 在 11/28。",
-     "Let's start with the cleaning validation strategy, Item 1. We'll submit it step by step: Step 1 by October 3rd, Step 2 by October 20th, Step 3A by November 9th, and Step 3B by November 28th."),
-    ("生产前来不及改造的设备和管路（第 38 行），会在清洁文件里逐项建立对应关系：每个差距对应哪些清洁和检查措施。时间跟清洗验证策略一致。",
-     "For equipment and lines that can't be fixed before production — Item 37 — we'll build direct traceability in the cleaning documents. Each gap will be linked to its cleaning and inspection controls. Same timeline as the strategy."),
-    ("喷淋覆盖（第 44 行）：我们会做确认，并把压力、流量、时间这些参数固定下来。完成时间【待定】。",
-     "On spray coverage, Item 43: we'll verify it and lock down the parameters — pressure, flow and time. The date is [TBD]."),
-    ("PD 泵的擦拭取样（第 35 行）：更新 SOP，10/04 前完成。",
-     "PD pump swab sampling, Item 34: we'll update the SOP by October 4th."),
-    ("软管：使用前用工艺溶剂冲洗并记录（第 13 行），在 Step 3 Demo 前执行，时间【待定】；软管生命周期管理 SOP（第 12 行）11/30 完成。",
-     "Hoses: pre-use rinse with process solvent, with a record — Item 12. We'll do this before the Step 3 demo; date [TBD]. The hose lifecycle SOP, Item 11, will be done by November 30th."),
-    ("手套箱酒精擦拭（第 29 行）：10/04 前更新。",
-     "Glovebox alcohol wipe, Item 28: updated by October 4th."),
-    ("产品切换策略（第 42 行）和新设备放行（第 43 行）：我们会单独做一次说明，时间【待定】。",
-     "Changeover strategy and new-equipment release, Items 41 and 42: we'll do a separate walkthrough with you. Date [TBD]."),
+    ("§主题 A：清洁 Cleaning（第 2、12、13、29、34、35、38、42、43、44 行，约 5 分钟）",
+     "§Theme A: Cleaning (Items 1, 11, 12, 28, 33, 34, 37, 41, 42, 43 — about 5 min)"),
+    ("先讲清洁，一共 10 项，按顺序过。",
+     "Let's start with cleaning. There are ten items, and I'll go in order."),
+    ("第 2 行｜清洗验证与确认策略：按步骤提交——Step 1 在 10/03，Step 2 在 10/20，Step 3A 在 11/09，Step 3B 在 11/28。我们理解礼来需要在生产可销售批之前，对我们的清洁能力有信心。",
+     "Item 1 — cleaning validation and verification strategy. We'll submit it step by step: Step 1 by October 3rd, Step 2 by October 20th, Step 3A by November 9th, and Step 3B by November 28th. We understand you need confidence in our cleaning before we make saleable batches."),
+    ("第 12 行｜专用产品接触软管和溶剂软管的生命周期管理：修订 SOP，明确相应要求，包括不论批次长短都定期目视检查。11/30。",
+     "Item 11 — lifecycle of dedicated product-contact and solvent hoses. We'll revise the SOP to define the requirements, including regular visual inspection regardless of campaign length. By November 30th."),
+    ("第 13 行｜溶剂和工艺液转移软管的使用前清洁：现在新软管首次安装后用甲醇、水冲洗，再氮气吹干。按礼来建议，Step 3 Demo 前改用工艺溶剂冲洗一次，并记录在相应记录里。时间【待定】。",
+     "Item 12 — pre-use cleaning of transfer hoses. Today, new hoses are rinsed with methanol, then water, and dried with nitrogen after first installation. As you recommended, before the Step 3 demo we'll rinse once with process solvent and record it. Date [TBD]."),
+    ("第 29 行｜手套箱清洁：水擦之后增加酒精擦拭，避免残留水分。10/04。",
+     "Item 28 — glovebox cleaning. After the water wipe, we add an alcohol wipe so no water is left behind. By October 4th."),
+    ("第 34 行｜第 4 类系统 PD 泵进出口低点排净，清洁前后从这些点排净并用氮气吹扫：这个能力已经具备。",
+     "Item 33 — low-point drains at the inlet and outlet of PD pumps in Category 4 systems, with draining and nitrogen purge before and after cleaning. That's already in place."),
+    ("第 35 行｜PD 泵清洁程序：目前用淋洗取样做残留检测。SOP 增加擦拭取样，考虑大面积软部件的回收率和有代表性的擦拭位置。10/04。",
+     "Item 34 — PD pump cleaning program. Today we use rinse sampling for residues. We'll add swab sampling to the SOP, covering recovery for the large soft parts and a representative swab location. By October 4th."),
+    ("第 38 行｜生产前来不及整改的设备和管路差距：在清洁文件里逐项建立对应关系，包括人工清洁、重点检查，以及死角的清洁或排净要求。时间同第 2 行。",
+     "Item 37 — equipment and piping gaps not fixed before production. We'll build direct traceability in the cleaning documents: manual cleaning, targeted inspection, and cleaning or drain instructions for dead legs. Same timeline as Item 1."),
+    ("第 42 行｜重复使用设备的切换策略：现在设备拆开清洗，回流溶剂由 ARL 做二级检测；活化罐到合成仪的管线用溶剂冲洗后重复使用。我们会准备一份 PPT 给礼来说明，同时评估是否需要擦拭取样。时间【待定】。",
+     "Item 41 — changeover strategy for reused equipment. Today, equipment is taken apart for cleaning, and ARL does Level 2 testing on the reflux solvent. The line from the activation tank to the synthesizer is reused after a solvent flush. We'll prepare a presentation for you and assess whether swabbing is needed. Date [TBD]."),
+    ("第 43 行｜新设备放行控制（去除加工残留、碎屑和颗粒，微生物负荷可接受）：修订 SOP。时间【待定】。",
+     "Item 42 — release controls for new equipment: removing fabrication residues, debris and particles, with acceptable bioburden. We'll revise the SOP. Date [TBD]."),
+    ("第 44 行｜喷淋覆盖测试：设备已做喷淋覆盖测试。下一步把确认过的压力、时间、报警限、流量时长，以及难清洁部位的人工清洁或擦拭，写进操作指导。时间【待定】。",
+     "Item 43 — spray coverage testing. It's been done on the equipment. Next, we'll put the qualified pressure, time, alarm limits and flow durations, plus manual cleaning or swabbing of hard-to-clean areas, into the operating instructions. Date [TBD]."),
 
-    ("§主题 B：设备与管路差距（约 5 分钟）", "§Theme B: Equipment and piping gaps (about 5 min)"),
-    ("设备差距（第 37 行）：重新设计正在进行。设计确认后，关键项会先跟礼来沟通，再执行。有几个罐的改造方案需要礼来确认。",
-     "Equipment gaps, Item 36: the redesign is in progress. Once the design is confirmed, we'll review the key points with you before we execute. A few tank modification plans will need Lilly's confirmation."),
+    ("§主题 B：设备改造 Equipment modification（第 5、6、7、36、37、54、55 行，约 4 分钟）",
+     "§Theme B: Equipment modification (Items 4, 5, 6, 35, 36, 53, 54 — about 4 min)"),
+    ("第 5 行｜管路坡度：C3/C4 的管路已改造安装，坡度正在确认。C1/C2 之前评估为没有坡度要求，只设了排净点，要求是可排净，这一点需要跟礼来重新确认。",
+     "Item 4 — line slope. The C3 and C4 lines are modified and installed, and we're verifying the slope now. For C1 and C2, we'd assessed earlier there's no slope requirement — only drainability, with drain points provided. We'd like to re-confirm that with you."),
+    ("我们会按工艺步骤一条线一条线排查，每个系统完成后把照片和视频发给礼来。C1/C2 的坡度怎么确认，想听听你们的意见。",
+     "We'll check each step and each line. When each system is done, we'll send you photos and videos. For C1 and C2, we'd like your input on how to confirm the slope."),
+    ("第 6 行｜视镜灯缺失：全线排查，缺的补采购，11/30（PPQ 后项）。正在建检查清单；过渡期按礼来建议用手电筒通过视镜目视检查。",
+     "Item 5 — missing sight-glass lights. We're reviewing the whole train and buying what's missing, by November 30th — this is a post-PPQ item. We're building an inspection checklist, and in the meantime we use flashlights through the sight glasses, as you suggested."),
+    ("第 7 行｜盐酸加料插底管：调整插底管长度，提供材质证明，确认具体合金牌号。10/01。",
+     "Item 6 — HCl charging dip tube. We'll adjust the length and provide the material certificate, including the exact alloy. By October 1st."),
+    ("第 36 行｜PD 泵长期替换：卫生级离心泵正在采购，PPQ 后安装，01/30/2027。过渡期每次用完两端排空、吹干，会提供详细操作程序。",
+     "Item 35 — long-term PD pump replacement. Hygienic centrifugal pumps are being procured and will be installed after PPQ, by January 30th, 2027. Until then, both ends are drained and blown dry after each use, and we'll provide the detailed procedure."),
+    ("第 37 行｜设备/管路标准差距（球阀、长接管、挂钩插底管、低点缺排净、仪表和流量计、法兰、螺栓连接桨叶、死角等）：重新设计正在进行。设计确认后，关键项先跟礼来沟通再执行。",
+     "Item 36 — gaps against equipment and piping standards: ball valves, long nozzles, hook-supported dip tubes, missing low-point drains, instruments and flow meters, flanges, bolted agitator blades, dead legs and so on. The redesign is in progress. Once it's confirmed, we'll review the key items with you before we execute."),
+    ("有两点需要礼来：一是物料管线排净设计按 2D 还是 3D，二是部分罐的改造方案已确认，请礼来帮忙确认。各步骤完成时间【待定】。",
+     "Two things we need from you: first, 2D or 3D for drainability on the material lines; second, some tank modification plans are ready, and we'd like your team to confirm them. Dates by step: [TBD]."),
     ("［可选］访问后我们把几台罐的改造也加进了范围，所以整体计划在重排，更新后的计划【待定】给到。",
      "[Optional] After your visit we added some vessel modifications to the scope, so we're re-baselining the overall schedule. We'll share the updated plan by [TBD]."),
-    ("管路坡度（第 5 行）：C3/C4 的管路已改造安装，坡度正在确认。C1/C2 之前评估为没有坡度要求，只设了排净点，要求是可排净。",
-     "Line slope, Item 4: the C3 and C4 lines are modified and installed, and we're verifying the slope now. For C1 and C2, we'd assessed earlier that there's no slope requirement — the requirement is drainability, and drain points are provided."),
-    ("我们会一条线一条线排查，每个系统完成后把照片和视频发给礼来确认。C1/C2 怎么确认，想听听你们的意见。",
-     "We'll go through it line by line. When each system is done, we'll send you photos and videos to review. For C1 and C2, we'd like your input on how you want to confirm it."),
-    ("隔膜阀角度（第 54 行）：逐条排查安装角度，需要调整的跟管路改造一起完成（现场进度需核实）。时间取决于 2D/3D 方案，【待定】。这一点等会儿在湿氮气 PPT 里一起说。",
-     "Diaphragm valve angles, Item 53: we're walking down every line to check the angle, and any corrections will be done together with the piping work (to be confirmed). The timing depends on the 2D or 3D option — [TBD]. I'll come back to this in the nitrogen deck."),
-    ("止回阀（第 9 行）：加在连续配液的废液管上，随管路改造，11/03 完成。",
-     "Check valves, Item 8: added on the waste lines of the continuous solution prep. Done with the piping work by November 3rd."),
-    ("PD 泵：低点排净已经有了（第 34 行，已完成）。换成卫生级离心泵（第 36 行）正在采购，PPQ 后安装，01/30/2027。过渡期每次用完两端排空、吹干，会提供详细操作程序。",
-     "PD pumps: the low-point drains are already in place — Item 33. Replacement with hygienic centrifugal pumps, Item 35, is being procured and will be installed after PPQ, by January 30th, 2027. Until then, both ends are drained and blown dry after each use, and we'll provide the detailed procedure."),
-    ("盐酸插底管（第 7 行）：调整长度并提供材质证明，10/01 前完成。进料管径（第 4 行）：IEPE 理论计算加现场测试，09/30。",
-     "HCl dip tube, Item 6: we'll adjust the length and provide the material certificate by October 1st. Inlet line sizing, Item 3: IEPE calculation plus an on-site test, by September 30th."),
-    ("视镜灯（第 6 行）：全线排查，缺的补采购，11/30；正在建检查清单，过渡期按礼来建议用手电筒通过视镜目视检查。",
-     "Sight-glass lights, Item 5: full train review, missing lights purchased by November 30th. We're building an inspection checklist. In the meantime, we use flashlights through the sight glasses, as you suggested."),
+    ("第 54 行｜隔膜阀安装角度：逐条排查含隔膜阀的管线，不合规的整改，跟管路改造一起做（现场进度需核实）。时间取决于 2D/3D，【待定】。这一点等会儿在湿氮气 PPT 里一起说。",
+     "Item 53 — diaphragm valve angles. We're walking down every line with diaphragm valves and correcting any that are wrong, together with the piping work (to be confirmed). Timing depends on 2D or 3D — [TBD]. I'll come back to this in the nitrogen deck."),
+    ("第 55 行｜有代表性的取样能力：在 100 L 配液罐上加装取样阀。时间【待定】。",
+     "Item 54 — representative sampling. We'll install a sampling valve on the 100 L prep vessel. Date [TBD]."),
 
-    ("§主题 C：CNC 物流与环境（约 3 分钟）", "§Theme C: CNC logistics and environment (about 3 min)"),
-    ("物流通道（第 10 行）：短期方案是改造物流通道，在 CNC 前加一个缓冲间，变更已提交。完成时间【待定】。",
-     "Logistics corridor, Item 9: the short-term fix is to modify the corridor and add an airlock before the CNC area. The change control is submitted. Completion date [TBD]."),
-    ("Step 1 在 10 月初就开始了，时间上来不及。我们建议以 Step 3 的 Pre-PPQ 作为这项的完成节点，请礼来确认。",
-     "Step 1 starts in early October, so we can't make it in time for that. We propose Step 3 Pre-PPQ as the milestone for this item. We'd like Lilly to confirm."),
-    ("过渡期（第 22 行）用管理措施：物料到达后由专人直接转入 CNC。SOP 10/20 前更新。长期的缓冲间（第 23 行）变更 10/20 提交。",
-     "In the meantime, Item 21, we use an admin control: a dedicated operator moves the material into the CNC as soon as it arrives. SOP updated by October 20th. The long-term buffer room, Item 22, change control by October 20th."),
-    ("CNC 湿度（第 30 行）：空调机组加冷却盘管，需要在生产间隙停产施工和确认，05/30/2027。过渡期按礼来建议用移动除湿机，相应程序【待定】（需核实）。",
-     "CNC humidity, Item 29: we'll add cooling coils to the AHU. The affected rooms have to stop for the work and qualification, so the date is May 30th, 2027. In the short term we'll use portable dehumidifiers, as you suggested. The procedure is [TBD] (to be confirmed)."),
-    ("更衣内层（第 45 行）和门禁（第 46 行）：更新程序并给礼来说明，11/10。",
-     "Gowning base layer and access control, Items 44 and 45: procedures updated and presented to you by November 10th."),
+    ("§主题 C：物流通道 Material logistics corridor + CNC 湿度 CNC humidity（第 10、22、23、30 行，约 2.5 分钟）",
+     "§Theme C: Material logistics corridor + CNC humidity (Items 9, 21, 22, 29 — about 2.5 min)"),
+    ("第 10 行｜12 车间 CNC 原料暂存区缺少缓冲区和压差联锁：短期方案是提交变更，改造厂区物流通道，原料进 CNC 前增加一个气闸间。完成时间【待定】。",
+     "Item 9 — the CNC raw material staging area in Workshop 12 has no buffer zone or pressure interlock. The short-term fix: a change control to modify the logistics corridor and add an airlock before materials go into the CNC area. Completion date [TBD]."),
+    ("Tracker 写的是 Pre-PPQ 前完成，但 Step 1 在 10/05 就开始，时间上来不及。我们建议以 Step 3 Pre-PPQ 作为完成节点，请礼来确认。",
+     "The tracker says before Pre-PPQ, but Step 1 starts on October 5th, so we can't make that. We propose Step 3 Pre-PPQ as the milestone. We'd like Lilly to confirm."),
+    ("第 22 行｜原料接收和转入 CNC 的管理措施：现在规定物料到车间后由专人转入 CNC。SOP 补充物料全流程管理，避免转运中出现空档。10/20。",
+     "Item 21 — admin controls for receiving materials and moving them into CNC. Today, a dedicated operator moves the material into the CNC once it arrives. We'll add full material-flow management to the SOP so there are no gaps. By October 20th."),
+    ("第 23 行｜长期的气闸或物理隔离（PPQ 后项）：提交变更，增加缓冲间。变更 10/20 提交。",
+     "Item 22 — long-term airlock or physical segregation, a post-PPQ item. We'll raise a change control to add a buffer room, by October 20th."),
+    ("第 30 行｜CNC 区夏季湿度低于 60%（PPQ 后项）：空调机组加冷却盘管，在生产间隙完成施工和确认，受影响房间需要停产，05/30/2027。过渡期按礼来建议用移动除湿机，相应程序【待定】（需核实）。",
+     "Item 29 — keeping CNC humidity below 60% in summer, a post-PPQ item. We'll add cooling coils to the AHUs and qualify during a production gap. The affected rooms have to stop, so the date is May 30th, 2027. In the short term we'll use portable dehumidifiers, as you suggested. The procedure is [TBD] (to be confirmed)."),
 
-    ("§主题 D：钝化、CCS 与过滤（约 3 分钟）", "§Theme D: Passivation, CCS and filtration (about 3 min)"),
-    ("钝化（第 20 行）：L1、L2、L3 的 Step 1 都已完成，Step 2 在 09/29；L3 的 Step 3 在 10/07。GG917 的 Step 1 和 Step 3 已完成，Step 2 在 10/02。",
-     "Passivation, Item 19: Step 1 is done for L1, L2 and L3, and Step 2 is on September 29th. L3 Step 3 is October 7th. For GG917, Steps 1 and 3 are done, and Step 2 is October 2nd."),
-    ("一期罐区（第 21 行）暂不钝化，用金属离子检测来控制。二期罐区交付后钝化，之后所有项目都用二期的溶剂，02/17/2027。",
-     "The Phase I tank farm, Item 20, won't be passivated for now. We control it with metal-ion testing. Once the Phase II tank farm is handed over, we'll passivate it, and all later projects will use Phase II solvents. Target February 17th, 2027."),
-    ("CCS：交叉污染汇总（第 24 行）10/20；工艺专项评估（第 32 行）10/04。过滤策略写进 SOP/CCS（第 27 行）和液体原料过滤（第 28 行）都在 10/04。过滤器完整性策略（第 49 行）10/20 说明。",
-     "CCS: the cross-contamination summary, Item 23, by October 20th. The process-specific assessment, Item 31, by October 4th. The filtration strategy in the SOP and CCS, Item 26, and liquid raw material filtration, Item 27, both by October 4th. We'll present the filter integrity testing strategy, Item 48, by October 20th."),
+    ("§主题 D：钝化 Passivation + CCS + 过滤 Filtration strategy（第 20、21 / 24、32 / 27、28、49 行，约 3.5 分钟）",
+     "§Theme D: Passivation + CCS + Filtration strategy (Items 19, 20 / 23, 31 / 26, 27, 48 — about 3.5 min)"),
+    ("第 20 行｜GG917 和 LAARA 工艺管线钝化：L1、L2、L3 的 Step 1 都已完成，Step 2 在 09/29；L3 的 Step 3 在 10/07。GG917 的 Step 1 和 Step 3 已完成，Step 2 在 10/02。",
+     "Item 19 — passivation of the GG917 and LAARA process lines. Step 1 is done for L1, L2 and L3, and Step 2 is on September 29th. L3 Step 3 is October 7th. For GG917, Steps 1 and 3 are done, and Step 2 is October 2nd."),
+    ("第 21 行｜溶剂储罐和总管钝化计划：一期罐区暂不钝化，用金属离子检测来控制。二期罐区交付后，管线和储罐钝化，之后所有项目都用二期罐区的溶剂。02/17/2027。",
+     "Item 20 — passivation plan for bulk solvent tanks and headers. The Phase I tank farm won't be passivated for now; we control it with metal-ion testing. Once the Phase II tank farm is handed over, its lines and tanks will be passivated, and all later projects will use Phase II solvents. By February 17th, 2027."),
+    ("第 24 行｜全厂多产品交叉污染风险评估：CCS 文件缺少详细描述。在各步骤的 CCS 里补充风险和控制措施的汇总。10/20。",
+     "Item 23 — site multiproduct cross-contamination risk assessment. Our CCS documents don't have enough detail, so we'll add a summary of risks and mitigations to each step's CCS. By October 20th."),
+    ("第 32 行｜工艺连接和公用管线的交叉污染风险，包括 GG917 和 LAARA 的共用公用系统和设备隔离：在 CCS 里补充详细评估。10/04。",
+     "Item 31 — cross-contamination risk from process connections and utility lines, including shared utilities and equipment isolation for GG917 and LAARA. We'll add a detailed assessment to the CCS. By October 4th."),
+    ("第 27 行｜各步骤过滤策略（位置、类型、更换标准、依据、图表），与礼来公司过滤指南一致：更新 SOP 和 CCS。10/04。",
+     "Item 26 — the filtration strategy for each step — location, type, replacement criteria, justification, diagrams — in line with your corporate guidance. We'll update the SOP and CCS by October 4th."),
+    ("第 28 行｜所有步骤的液体原料过滤，以及 SPPS 原料桶加料用 75 微米过滤的依据：在 SOP 和 CCS 里补充。10/04。",
+     "Item 27 — filtration of liquid raw materials for all steps, and the justification for 75-micron filtration when charging SPPS drums. We'll add it to the SOP and CCS by October 4th."),
+    ("第 49 行｜过滤器使用前后完整性测试策略：我们有内部程序，10/20 前给礼来说明。",
+     "Item 48 — pre-use and post-use filter integrity testing. We have an internal procedure, and we'll present it to you by October 20th."),
 ]
 
 SEG3 = [
@@ -361,43 +383,73 @@ SEG4 = [
      "For water use: connect the hose, open the valve, flush to waste, then supply the point of use. Then open the nitrogen valve, purge toward the equipment, then back toward the PW outlet, and close all valves."),
     ("取样：同样先冲洗排废，再人工取样。过滤器每次使用前安装，使用时间不超过 24 小时。",
      "For sampling: flush to waste first, then take a manual sample. Filters are installed before each use, and each filter is used for no more than 24 hours."),
-    ("§第 5–6 页：行动项与时间（日期按会前统一后的版本讲）", "§Slides 5–6: Action items and dates (use the aligned dates)"),
-    ("专用纯水软管寿命（第 11 行）：实际做法是每周清洁、每六个月更换，会用研究数据支持。时间【待定】。",
-     "Service life of dedicated PW hoses, Item 10: our practice is weekly cleaning and replacement every six months, and we'll back it up with a study. Date [TBD]."),
-    ("硅胶水管换 PTFE（第 25 行）：国产交期约 3 周，进口约 8 周。时间【待定】。",
-     "Replacing silicone water hoses with PTFE, Item 24: domestic lead time is about three weeks, imported about eight. Date [TBD]."),
-    ("用后立即断开水管并受控存放（第 26 行）：更新程序文件。软管端口用透气膜覆盖（第 33 行）：透气膜已采购。时间【待定】。",
-     "Disconnecting water hoses right after use and storing them properly, Item 25: we'll update the procedure. Covering hose ends with permeable film, Item 32: the film is already purchased. Dates [TBD]."),
-    ("用水点过滤器（第 40 行）：立即纠正，按 24 小时更换执行。软管端离地至少 6 英寸（第 52 行）：短期培训现场人员，长期装不锈钢软管架。时间【待定】。",
-     "Point-of-use filters, Item 39: an immediate corrective action, with the 24-hour limit. Hose ends at least six inches off the floor, Item 51: short term, we train the operators; long term, we install stainless-steel hose racks. Dates [TBD]."),
-    ("新用水点排放口取样的代表性（第 41 行）：评估进行中，时间【待定】。移动容器放置时间研究（第 47 行）：时间【待定】。",
-     "Representative sampling from the new point-of-use drains, Item 40: assessment in progress, date [TBD]. Hold-time studies for portable vessels, Item 46: date [TBD]."),
-    ("§改造提议（重点）", "§Proposal (key message)"),
-    ("纯水总管改造（第 39 行）：提交变更，按第 1 页的方案改造，阀门按 3D 设计。周期包括采购、施工、钝化、验证，完成时间【待定】。",
-     "The PW header modification, Item 38: we'll raise a change control and modify it per Slide 1, with valves designed to 3D. The timeline covers procurement, installation, passivation and validation. Completion: [TBD]."),
+    ("§第 5 页：行动项（第 11、25、26、39 行；日期按会前统一后的版本讲）",
+     "§Slide 5: Items 10, 24, 25, 38 (use the aligned dates)"),
+    ("第 11 行｜专用纯水软管一个月寿命的依据：实际做法是每周清洁、每六个月更换，会做使用/消毒周期研究来支持。时间【待定】。",
+     "Item 10 — basis for the one-month life of dedicated PW hoses. Our practice is weekly cleaning and replacement every six months, and we'll support it with a use and sanitization study. Date [TBD]."),
+    ("第 25 行｜硅胶水管换 PTFE：国产交期约 3 周，进口约 8 周。时间【待定】。",
+     "Item 24 — replacing silicone water hoses with PTFE. Domestic lead time is about three weeks, imported about eight. Date [TBD]."),
+    ("第 26 行｜用后立即断开水管并受控存放：更新程序文件。时间【待定】。",
+     "Item 25 — disconnecting water hoses right after use and storing them properly. We'll update the procedure. Date [TBD]."),
+    ("第 39 行｜纯水总管改造（重点）：提交变更，按第 1 页的方案改造，阀门按 3D 设计。周期包括采购、施工、钝化、验证，完成时间【待定】。",
+     "Item 38 — the PW header modification, the key one. We'll raise a change control and modify it per Slide 1, with valves designed to 3D. The timeline covers procurement, installation, passivation and validation. Completion: [TBD]."),
     ("在 Pre-PPQ 前完成比较紧。我们建议总管改造放在 PPQ 之后，PPQ 前按现行方式用水，同时执行先冲洗排废、24 小时过滤器这些措施（过渡方案细节需核实）。",
      "Finishing this before Pre-PPQ is tight. Our proposal is to do the header work after PPQ. Before that, we keep the current practice, plus the interim controls — flush to waste before use, and the 24-hour filters (interim details to be confirmed)."),
     ("这样不影响 Pre-PPQ，同时控制风险。请礼来确认这个方向。",
      "That way it doesn't block Pre-PPQ, and the risk stays controlled. We'd like Lilly to confirm this approach."),
+    ("§第 6 页：行动项（第 33、40、41、52 行）+ 第 47 行", "§Slide 6: Items 32, 39, 40, 51 + Item 46"),
+    ("第 33 行｜软管晾干存放时端口用透气膜覆盖：透气膜已采购。时间【待定】。",
+     "Item 32 — covering hose ends with permeable film while they dry. The film is already purchased. Date [TBD]."),
+    ("第 40 行｜用水点过滤器：立即纠正，每次使用前安装，使用时间不超过 24 小时，要求写进 MOR。时间【待定】。",
+     "Item 39 — point-of-use filters. An immediate corrective action: installed before each use, no more than 24 hours in use, and written into the MOR. Date [TBD]."),
+    ("第 41 行｜新用水点排放口取样的代表性，以及是否需要正式再验证：评估进行中。时间【待定】。",
+     "Item 40 — representative sampling from the new point-of-use drains, and whether formal revalidation is needed. Assessment in progress. Date [TBD]."),
+    ("第 52 行｜软管端离地至少 6 英寸，并有明显标识：短期培训现场人员，长期装不锈钢软管架。时间【待定】。",
+     "Item 51 — hose ends at least six inches off the floor, with a clear visual indicator. Short term, we train the operators; long term, we install stainless-steel hose racks. Date [TBD]."),
+    ("第 47 行（PPT 里没有）｜移动容器放置时间研究，确认可完全排净，并写进操作文件：时间【待定】。礼来提到即使研究支持更长，也按 48 小时刷新，我们会在方案里考虑。",
+     "Item 46, not in the deck — hold-time studies for portable vessels, confirming full drainability, and adding it to the operating documents. Date [TBD]. We note your point on a 48-hour refresh limit, and we'll take it into account."),
 ]
 
 SEG5 = [
-    ("§已完成 / 进行中", "§Completed / in progress"),
-    ("已完成的：爆破片铭牌（第 3 行）；杂质调查 4 项（第 16–19 行）：直接采购低乙醛 DIPEA、改大包装、SC 偶联氮气鼓泡 17 m³/h 已证明有效、双方已同意不采用吹扫/抽真空。",
-     "Completed: the rupture disc nameplate, Item 2. And four impurity items, 15 to 18: we'll buy low-acetaldehyde DIPEA directly, switch to larger drums, 17 cubic meters per hour sparging is proven for the SC coupling, and we agreed not to use sweep or vacuum."),
-    ("进行中：DIPEA 样品（第 15 行）结果低于 50 ppm，等方法对齐后，09/30 关闭。",
-     "In progress: the DIPEA samples, Item 14, are below 50 ppm. Once we align on the method, we'll close it by September 30th."),
-    ("§文件与小项", "§Documents and small items"),
-    ("MOR 增加移动秤读数要求（第 8 行）：10/03。尾气总管图纸（第 31 行）：本周内上传。粉碎机操作策略（第 51 行）：09/27。",
-     "MOR update for the mobile-scale reading, Item 7: October 3rd. Vent header drawings, Item 30: uploaded before the end of this week. Mill operating strategy, Item 50: September 27th."),
-    ("光滑内壁软管（第 14 行）：国产约 3 周，进口约 2 个月。我们倾向用国产，请礼来确认可以接受。",
-     "Smooth-bore hoses, Item 13: domestic takes about three weeks, imported about two months. We'd prefer domestic — please confirm that's acceptable."),
-    ("pH 探头（第 56 行）：伸缩式护套采购周期约 6 周。",
-     "pH probes, Item 55: the retractable housing has about a six-week procurement lead time."),
-    ("三合一搅拌桨行程（第 50 行）、密闭固体加料（第 53 行）、100 L 配液罐加取样阀（第 55 行）：时间【待定】，确认后更新。",
-     "AFD stroke height, Item 49; contained solids charging, Item 52; and a sampling valve on the 100 L prep vessel, Item 54: dates [TBD]. We'll update once confirmed."),
-    ("流动相控制（第 48 行）：配液混合器下游在线监测电导率，合格的进流动相罐，不合格的转废液；质量流量计计量，混合器和接收罐都有 pH 监测。",
-     "Mobile phase controls, Item 47: conductivity is monitored after the mixer. In-spec mobile phase goes to the tank, out-of-spec goes to waste. Dosing is by mass flow meters, and there's pH monitoring at the mixer and the receiving tank."),
+    ("§DIPEA（第 15–19 行，约 2 分钟）：4 项已完成，1 项进行中", "§DIPEA (Items 14–18, about 2 min): four completed, one in progress"),
+    ("第 15 行｜乙醛低于 50 ppm 的 DIPEA 供应商：已采购并收到供应商样品，初步检测低于 50 ppm。等分析方法跟礼来对齐后正式放行，09/30。进行中。",
+     "Item 14 — a reliable supplier of DIPEA with less than 50 ppm acetaldehyde. We've bought and received supplier samples, and preliminary results are below 50 ppm. Final release waits for us to align the analytical method with you. Target September 30th. In progress."),
+    ("第 16 行｜内部处理 DIPEA 降乙醛：小试有一定效果，但决定直接向供应商采购低乙醛 DIPEA，不在凯莱英内部精制。已完成。",
+     "Item 15 — in-house DIPEA treatment to reduce acetaldehyde. Lab trials showed some effect, but we'll buy low-acetaldehyde DIPEA directly from the supplier, with no further purification here. Completed."),
+    ("第 17 行｜缩短洗涤中 DIPEA 暴露时间：实验证明洗涤时间长不会导致 DIPEA 分解；与 RS 批相比，暴露时间差异主要来自小包装频繁换桶。改用 200 L 大桶。已完成。",
+     "Item 16 — shorter DIPEA exposure during washes. Our data show long washes don't decompose DIPEA. Versus the RS batch, the difference came from small packages and frequent drum changes, so we're moving to 200-liter drums. Completed."),
+    ("第 18 行｜SC 偶联提高氮气鼓泡流量降 HCN：22 kg 批量下 17 m³/h 已证明有效，流量可调到 30 m³/h，相关文件同步更新。已完成。",
+     "Item 17 — higher nitrogen sparge for the SC coupling to reduce HCN. 17 cubic meters per hour is proven effective at the 22-kilogram scale, and it can go up to 30. We'll update the documents. Completed."),
+    ("第 19 行｜SC 偶联氮气吹扫降 HCN：双方已达成一致，不建议吹扫/抽真空。已完成。",
+     "Item 18 — nitrogen sweep during the SC coupling. We agreed that sweep or vacuum isn't recommended. Completed."),
+    ("§其他 Other（第 3、4、8、9、14、31、45、46、48、50、51、53、56 行，约 4 分钟）",
+     "§Other (Items 2, 3, 7, 8, 13, 30, 44, 45, 47, 49, 50, 52, 55 — about 4 min)"),
+    ("第 3 行｜爆破片铭牌：已完成。",
+     "Item 2 — rupture disc nameplate. Completed."),
+    ("第 4 行｜进料管径满足 200 L/h：IEPE 理论计算，加现场测试。09/30。",
+     "Item 3 — inlet line sizing for 200 liters per hour. IEPE calculation plus an on-site test. By September 30th."),
+    ("第 8 行｜蠕动泵排空软管后读移动秤：MOR/SOP 里目前没有细化要求，更新 MOR。10/03。",
+     "Item 7 — reading the mobile scale after the peristaltic pump empties the hose. The MOR and SOP don't have this detail today, so we'll update the MOR. By October 3rd."),
+    ("第 9 行｜工艺废液总管无止回阀：评估回流风险，需要的加装止回阀，跟整体管路施工一起做。11/03。",
+     "Item 8 — no check valves on the process waste header. We'll assess backflow risk and add check valves where needed, together with the overall piping work. By November 3rd."),
+    ("第 14 行｜波纹软管换光滑内壁（参考 Pharmaline N）：现在用铂金硫化硅胶管，计划更换。国产约 3 周，进口约 2 个月。请礼来确认国产是否满足要求。",
+     "Item 13 — replacing corrugated hoses with smooth-bore ones, such as Pharmaline N. We use platinum-cured silicone today, and replacement is planned. Domestic takes about three weeks, imported about two months. Please confirm whether domestic hoses are acceptable."),
+    ("第 31 行｜尾气总管图纸和设计给礼来审阅：本周内上传。",
+     "Item 30 — vent header drawings and designs for your review. Uploaded before the end of this week."),
+    ("第 45 行｜访客和支持人员在洁净区穿专用内层（PPQ 后项）：修订洁净区更衣程序。11/10。",
+     "Item 44 — a dedicated base layer for visitors and support staff in classified areas, a post-PPQ item. We'll revise the gowning procedure by November 10th."),
+    ("第 46 行｜人员进入权限管理（PPQ 后项）：我们有内部程序，11/10 前给礼来说明。",
+     "Item 45 — access control, a post-PPQ item. We have an internal procedure and will present it to you by November 10th."),
+    ("第 48 行｜确保只有合格流动相进入工艺：配液混合器下游在线监测电导率，合格的进流动相罐，不合格的转废液；质量流量计计量，混合器和接收罐都有 pH 监测。现有措施已覆盖。",
+     "Item 47 — making sure only in-spec mobile phase reaches the process. Conductivity is monitored after the mixer: in-spec goes to the tank, out-of-spec goes to waste. Dosing is by mass flow meters, and pH is monitored at the mixer and the receiving tank. Existing controls cover this."),
+    ("第 50 行｜三合一搅拌桨行程，置换洗涤时桨叶不被浸没：时间【待定】。",
+     "Item 49 — AFD stroke height, so the blades aren't submerged during displacement washes. Date [TBD]."),
+    ("第 51 行｜粉碎机操作策略（成品取样、惰化、目标桶重不超装、筛网温度监测、人机工程）：09/27。",
+     "Item 50 — mill operating strategy: final sampling, inerting, target drum weight without overfill, screen temperature, and ergonomics. By September 27th."),
+    ("第 53 行｜所有固体加料用密闭装置，所有步骤（含 SPPS 和裂解）用分体阀加料：时间【待定】。",
+     "Item 52 — contained devices for all solids charging, and split-valve charging for every step, including SPPS and cleavage. Date [TBD]."),
+    ("第 56 行｜非伸缩式 pH 探头校准时罐保持封盖，评估换伸缩式护套：更新校准指导（时间【待定】）；伸缩式护套采购周期约 6 周。",
+     "Item 55 — keeping tanks capped while non-retractable pH probes are calibrated, and looking at retractable housings. We'll update the calibration instruction, date [TBD]. Retractable housings take about six weeks to procure."),
 ]
 
 SEG6 = [
@@ -484,12 +536,25 @@ TBD_LIST = [
     ["纯水 8 项日期（Tracker 与 PPT 统一后再填）", "11, 25, 26, 33, 39, 40, 41, 52", "纯水负责人"],
     ["移动容器放置时间研究（礼来提 48 小时刷新上限）", "47", "研发 / 生产 / QA"],
     ["纯水 PPQ 前过渡措施细节（内部会议提过每个用水点加三通、先排废）", "39, 41", "纯水负责人"],
-    ["三合一搅拌桨行程 / 密闭固体加料 / 100 L 配液罐取样阀", "50, 53, 55", "工程 / 生产"],
+    ["三合一搅拌桨行程 / 100 L 配液罐取样阀", "50, 55", "郭泽鹏"],
+    ["密闭固体加料 / 分体阀加料", "53", "刘林冲"],
+    ["pH 探头校准指导更新时间", "56", "生产"],
     ["更新版 Tracker 发给礼来的日期", "—", "项目"],
 ]
 
 
+def check_coverage():
+    """Every tracker row 2–56 must be named (as 第 N 行) in segments 2, 4 or 5."""
+    mentioned = set()
+    for cn, _ in SEG2 + SEG4 + SEG5:
+        if not cn.startswith("§"):
+            mentioned.update(int(n) for n in re.findall(r"第 (\d+) 行", cn))
+    missing = sorted(set(range(2, 57)) - mentioned)
+    assert not missing, f"tracker rows not covered: {missing}"
+
+
 def build():
+    check_coverage()
     doc = Document()
     sec = doc.sections[0]
     sec.page_width = Cm(21.0)
@@ -532,13 +597,16 @@ def build():
     add_h1(doc, "二、流程与时间分配（45 分钟）")
     add_table(doc, ["#", "时间", "分钟", "内容", "屏幕", "Tracker 行"], RUN_SHEET,
               [0.7, 2.0, 1.1, 5.2, 4.2, 4.4], size=9.5)
-    add_note(doc, "控时提示：第 2 段超时时，主题 D 只报日期不展开；第 5 段可压缩到 3 分钟，把时间留给第 6 段的决策确认。")
+    add_note(doc, "覆盖范围：Tracker 第 2–56 行共 55 项全部写进讲稿——第 2 段 28 项、第 4 段 9 项、第 5 段 18 项；"
+                  "第 3 段湿氮气 PPT 再次引用第 37、54 行。\n"
+                  "控时提示：第 2 段超时时，主题 D 每项只报措施和日期；第 5 段的“其他”可只读行号、事项和日期，"
+                  "把时间留给第 6 段的决策确认。")
 
     add_h1(doc, "三、分段讲稿（中英对照）")
     add_h2(doc, "第 1 段｜开场与总体状态（0:00–0:04，4 分钟）", "屏幕：Tracker（EN）首屏")
     add_script(doc, SEG1)
     add_h2(doc, "第 2 段｜Tracker 重点项（0:04–0:19，15 分钟）",
-           "屏幕：Tracker（EN），按主题跳行。括号内为 Tracker 行号；英文稿用 Item 号（= 行号 − 1）。")
+           "屏幕：Tracker（EN），按 P 列分类筛选，组内按行号往下讲。中文稿标 Tracker 行号，英文稿用 Item 号（= 行号 − 1）。")
     add_script(doc, SEG2)
     add_h2(doc, "第 3 段｜湿氮气装置使用策略（0:19–0:26，7 分钟）",
            "屏幕：Humidified_Nitrogen_System_Operating_Strategy_2026-09-24_EN.pptx")
@@ -546,7 +614,8 @@ def build():
     add_h2(doc, "第 4 段｜纯水使用方案（0:26–0:34，8 分钟）",
            "屏幕：Purified_Water_Use_Plan_EN.pptx。会前先统一 Tracker 与 PPT 的日期，会上只讲一套。")
     add_script(doc, SEG4)
-    add_h2(doc, "第 5 段｜其余项快速过（0:34–0:40，6 分钟）", "屏幕：Tracker（EN）")
+    add_h2(doc, "第 5 段｜其余项快速过（0:34–0:40，6 分钟）",
+           "屏幕：Tracker（EN），按 P 列筛选：先 DIPEA，再“其他”，组内按行号。")
     add_script(doc, SEG5)
     add_h2(doc, "第 6 段｜决策确认与下一步（0:40–0:45，5 分钟）", "屏幕：本讲稿第四部分")
     add_script(doc, SEG6)
