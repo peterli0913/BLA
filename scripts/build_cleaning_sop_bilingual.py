@@ -2,11 +2,13 @@
 """Bilingual (English/Chinese) version of the Step 1 cleaning and disinfection SOP.
 
 Every Chinese paragraph that has no English yet gets "English/" inserted in front of the
-Chinese text, inside the existing run so fonts and sizes follow the original. Only
-word/document.xml is rewritten; headers, footers, watermark and all other parts are copied as-is.
+Chinese text as its own run (Times New Roman; 8 pt inside tables). Table paragraphs in 8 pt
+get an exact 10 pt line spacing. Obvious typos in the source are corrected first (CORRECTIONS).
+Only word/document.xml is rewritten; headers, footers, watermark and all other parts are copied as-is.
 
 Usage: python3 scripts/build_cleaning_sop_bilingual.py
 """
+import copy
 import re
 import zipfile
 from pathlib import Path
@@ -21,13 +23,54 @@ W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 XML_SPACE = "{http://www.w3.org/XML/1998/namespace}space"
 HAN = re.compile(r"[\u4e00-\u9fff]")
 SEP = "/"
+EN_FONT = "Times New Roman"
+SYMBOL_FONTS = {"MS Gothic"}  # checkbox glyphs; keep their font
+TABLE_SZ = "16"  # 8 pt
+TABLE_LINE = "200"  # exact 10 pt
 
-# Paragraphs left untouched: English already sits in the previous paragraph, or the source text is garbled.
+# Source typos fixed in both languages before translating, applied in order to each paragraph.
+CORRECTIONS = [
+    ("Connection loc原位清洁tion/", "Connection location/"),
+    ("Cle原位清洁ning method", "Cleaning method"),
+    ("Cleaning method/原位清洁清洁方法", "Cleaning method/清洁方法"),
+    ("In-situ or disssemle clening", "In-situ or disassemble cleaning"),
+    ("activation reactor", "activation tank"),
+    ("试镜", "视镜"),
+    ("取出取出", "取出"),
+    ("顺时针禁", "顺时针拧紧"),
+    ("在插固定螺杆", "再插固定螺杆"),
+    ("氮气吹至无溶剂残留氮气吹至无溶剂残留", "氮气吹至无溶剂残留"),
+    ("变径=", "变径"),
+    ("N,N-二甲基酰胺", "N,N-二甲基甲酰胺"),
+    ("Qa验收", "QA验收"),
+    ("对拆除的弯头，密封件表面进行擦拭清洗，直至目视无物料残留，使用压缩气体交替从变径两端",
+     "对拆除的弯头，密封件表面进行擦拭清洗，直至目视无物料残留，使用压缩气体交替从弯头两端"),
+    ("对拆除后管件内表面进行擦拭清洗，直至目视无物料残留，使用压缩气体交替从变径两端",
+     "对拆除后管件内表面进行擦拭清洗，直至目视无物料残留，使用压缩气体交替从管件两端"),
+    ("过滤器底座与壳体密封件表面进行擦拭清洗，直至目视无物料残留，使用压缩气体交替从变径两端",
+     "过滤器底座与壳体密封件表面进行擦拭清洗，直至目视无物料残留，使用压缩气体交替从过滤器两端"),
+]
+
+# Company terminology applied to all English added here.
+EN_TERMS = [
+    (r"\bactivation reactor", "activation tank"),
+    (r"\bActivation reactor", "Activation tank"),
+    (r"\bClamp-type\b", "Tri-clamp"),
+    (r"(?<!Tri-)\bclamps\b", "Tri-clamps"),
+    (r"(?<!Tri-)\bclamp\b", "Tri-clamp"),
+]
+
+# Paragraphs left untouched because their English sits in the neighbouring paragraph.
 SKIP = {
     "质量控制部，生产部，质量保证部",
     "冷凝器到接收罐和TJ4S-1213-R23釜管路）",
-    "Connection loc原位清洁tion/",
 }
+
+
+def fix(s):
+    for old, new in CORRECTIONS:
+        s = s.replace(old, new)
+    return s
 
 
 def wipe(obj, blow="blow dry with compressed air", qa=True, moist=False, end=""):
@@ -225,7 +268,7 @@ T = {
     "使用洁净擦拭布蘸取纯化水浸湿后对拆除后直管进行擦拭清洗，直至目视无物料残留，使用压缩气体交替从直管两端进行吹干，QA验收；将直管进行复位安装，更换部件两端连接的垫片":
         wipe_ends("the removed straight pipe", "straight pipe") + " " + reinstall("straight pipe"),
     "使用洁净擦拭布蘸取纯化水浸湿后对拆除后管件内表面进行擦拭清洗，直至目视无物料残留，使用压缩气体交替从变径两端进行吹干，QA验收；":
-        wipe_ends("the inner surface of the removed pipe fitting", "reducer"),
+        wipe_ends("the inner surface of the removed pipe fitting", "pipe fitting"),
     "使用洁净擦拭布蘸取纯化水浸湿后对拆除后管路进行擦拭清洗，直至目视无物料残留，使用压缩气体交替从管路两端进行吹干，QA验收；":
         wipe_ends("the removed pipe", "pipe"),
     "使用洁净擦拭布蘸取纯化水浸湿后对拆除后阀门及内部阀芯，密封件表面进行擦拭清洗，直至目视无物料残留，使用压缩气体吹干，QA验收":
@@ -239,11 +282,11 @@ T = {
     "使用洁净擦拭布蘸取纯化水浸湿后对拆除的延伸管，密封件表面进行擦拭清洗，直至目视无物料残留，使用压缩气体交替从延伸管两端进行吹干，QA验收；":
         wipe_ends("the removed extension pipe and seal surfaces", "extension pipe"),
     "使用洁净擦拭布蘸取纯化水浸湿后对拆除的弯头，密封件表面进行擦拭清洗，直至目视无物料残留，使用压缩气体交替从变径两端进行吹干，QA验收；":
-        wipe_ends("the removed elbow and seal surfaces", "reducer"),
+        wipe_ends("the removed elbow and seal surfaces", "elbow"),
     "使用洁净擦拭布蘸取纯化水浸湿后对拆除的弯头，密封件表面进行擦拭清洗，直至目视无物料残留，使用压缩气体交替从弯头两端进行吹干，QA验收；":
         wipe_ends("the removed elbow and seal surfaces", "elbow"),
     "使用洁净擦拭布蘸取纯化水浸湿后对拆除的过滤器底座与壳体密封件表面进行擦拭清洗，直至目视无物料残留，使用压缩气体交替从变径两端进行吹干，QA验收；":
-        wipe_ends("the seal surfaces of the removed filter base and housing", "reducer"),
+        wipe_ends("the seal surfaces of the removed filter base and housing", "filter"),
     "使用活口扳手将三通三端连接的螺丝逆时针旋转松动取下":
         f"{ADJ_WRENCH} loosen counterclockwise and remove the screws at the three ends of the tee",
     "使用活口扳手将与三通的连接端的快开卡盘松开;": f"{ADJ_WRENCH} release the clamp at the tee connection end;",
@@ -720,14 +763,100 @@ def has_inline_english(s):
     return bool(re.search(r"[A-Za-z][A-Za-z .&()\-,;:]*\s*/\s*[\u4e00-\u9fff]", s))
 
 
-def insert_at(p, offset, text):
+RPR_ORDER = ["rStyle", "rFonts", "b", "bCs", "i", "iCs", "caps", "smallCaps", "strike", "dstrike", "outline",
+             "shadow", "emboss", "imprint", "noProof", "snapToGrid", "vanish", "webHidden", "color", "spacing", "w",
+             "kern", "position", "sz", "szCs", "highlight", "u", "effect", "bdr", "shd", "fitText", "vertAlign",
+             "rtl", "cs", "em", "lang", "eastAsianLayout", "specVanish", "oMath"]
+PPR_ORDER = ["pStyle", "keepNext", "keepLines", "pageBreakBefore", "framePr", "widowControl", "numPr",
+             "suppressLineNumbers", "pBdr", "shd", "tabs", "suppressAutoHyphens", "kinsoku", "wordWrap",
+             "overflowPunct", "topLinePunct", "autoSpaceDE", "autoSpaceDN", "bidi", "adjustRightInd", "snapToGrid",
+             "spacing", "ind", "contextualSpacing", "mirrorIndents", "suppressOverlap", "jc", "textDirection",
+             "textAlignment", "textboxTightWrap", "outlineLvl", "divId", "cnfStyle", "rPr", "sectPr", "pPrChange"]
+
+
+def child(parent, name, order):
+    """Return parent's w:<name> child, creating it at its schema position if missing."""
+    el = parent.find(W + name)
+    if el is not None:
+        return el
+    el = etree.Element(W + name)
+    rank = order.index(name)
+    for i, c in enumerate(parent):
+        local = etree.QName(c).localname
+        if local in order and order.index(local) > rank:
+            parent.insert(i, el)
+            return el
+    parent.append(el)
+    return el
+
+
+def in_table(p):
+    return any(a.tag == W + "tc" for a in p.iterancestors())
+
+
+def en_terms(s):
+    for pat, rep in EN_TERMS:
+        s = re.sub(pat, rep, s)
+    return s
+
+
+def replace_in_paragraph(p, old, new):
+    n_done, start = 0, 0
+    while True:
+        nodes = list(p.iter(W + "t"))
+        i = "".join(t.text or "" for t in nodes).find(old, start)
+        if i < 0:
+            return n_done
+        remaining, pos, first = len(old), 0, True
+        for t in nodes:
+            txt = t.text or ""
+            if remaining and pos + len(txt) > i:
+                k = max(i - pos, 0)
+                take = min(len(txt) - k, remaining)
+                t.text = txt[:k] + (new if first else "") + txt[k + take:]
+                t.set(XML_SPACE, "preserve")
+                first, remaining = False, remaining - take
+            pos += len(txt)
+        n_done, start = n_done + 1, i + len(new)
+
+
+def english_run(ref, text, table):
+    r = etree.Element(W + "r")
+    ref_rpr = ref.find(W + "rPr")
+    rpr = copy.deepcopy(ref_rpr) if ref_rpr is not None else etree.Element(W + "rPr")
+    r.append(rpr)
+    fonts = child(rpr, "rFonts", RPR_ORDER)
+    for a in ("ascii", "hAnsi", "cs"):
+        fonts.set(W + a, EN_FONT)
+    fonts.attrib.pop(W + "hint", None)
+    if table:
+        child(rpr, "sz", RPR_ORDER).set(W + "val", TABLE_SZ)
+        child(rpr, "szCs", RPR_ORDER).set(W + "val", TABLE_SZ)
+    t = etree.SubElement(r, W + "t")
+    t.text = text
+    t.set(XML_SPACE, "preserve")
+    return r
+
+
+def insert_english(p, offset, text, table):
     pos = 0
     for t in p.iter(W + "t"):
         n = len(t.text or "")
         if pos <= offset < pos + n:
-            k = offset - pos
-            t.text = (t.text or "")[:k] + text + (t.text or "")[k:]
-            t.set(XML_SPACE, "preserve")
+            k, r = offset - pos, t.getparent()
+            if k:
+                left = copy.deepcopy(r)
+                idx = list(r).index(t)
+                for c in list(left)[idx + 1:]:
+                    left.remove(c)
+                left[idx].text = t.text[:k]
+                for c in list(r)[:idx]:
+                    if c.tag != W + "rPr":
+                        r.remove(c)
+                t.text = t.text[k:]
+                t.set(XML_SPACE, "preserve")
+                r.addprevious(left)
+            r.addprevious(english_run(r, text, table))
             return
         pos += n
     raise ValueError(f"offset {offset} not found in {ptext(p)!r}")
@@ -743,16 +872,69 @@ def translate_paragraph(p, s, en):
         i = s.index(anchor, start)
         spots.append((i, text + SEP))
         start = i + len(anchor)
+    table = in_table(p)
     for i, text in reversed(spots):
-        insert_at(p, i, text)
+        insert_english(p, i, text, table)
+
+
+def set_latin_font(tree):
+    for r in tree.iter(W + "r"):
+        text = "".join(t.text or "" for t in r.findall(W + "t"))
+        if not re.search(r"[A-Za-z0-9]", text):
+            continue
+        rpr = r.find(W + "rPr")
+        if rpr is None:
+            rpr = etree.Element(W + "rPr")
+            r.insert(0, rpr)
+        fonts = child(rpr, "rFonts", RPR_ORDER)
+        if fonts.get(W + "ascii") in SYMBOL_FONTS:
+            continue
+        for a in ("ascii", "hAnsi", "cs"):
+            fonts.set(W + a, EN_FONT)
+
+
+def set_table_spacing(tree):
+    n = 0
+    for p in tree.iter(W + "p"):
+        if not in_table(p):
+            continue
+        sizes = set()
+        for r in p.iter(W + "r"):
+            if "".join(t.text or "" for t in r.findall(W + "t")):
+                sz = r.find(W + "rPr/" + W + "sz")
+                sizes.add(None if sz is None else sz.get(W + "val"))
+        if sizes != {TABLE_SZ}:
+            continue
+        ppr = p.find(W + "pPr")
+        if ppr is None:
+            ppr = etree.Element(W + "pPr")
+            p.insert(0, ppr)
+        sp = child(ppr, "spacing", PPR_ORDER)
+        sp.set(W + "line", TABLE_LINE)
+        sp.set(W + "lineRule", "exact")
+        n += 1
+    return n
+
+
+def build_lookup():
+    lookup = {}
+    for k, v in T.items():
+        v = en_terms(v) if isinstance(v, str) else [(a, en_terms(e)) for a, e in v]
+        fk = fix(k)
+        assert lookup.get(fk, v) == v, (fk, lookup[fk], v)
+        lookup[fk] = v
+    return lookup
 
 
 def main():
+    lookup = build_lookup()
     with zipfile.ZipFile(SRC) as zin:
         tree = etree.fromstring(zin.read("word/document.xml"))
-        done, missing = 0, set()
+        done, fixed, missing = 0, 0, set()
         last_by_cont = {}
         for p in tree.iter(W + "p"):
+            for old, new in CORRECTIONS:
+                fixed += replace_in_paragraph(p, old, new)
             s = ptext(p)
             if not s.strip():
                 continue
@@ -764,12 +946,15 @@ def main():
                 continue
             if prev is not None and prev.strip().endswith("/") and re.search("[A-Za-z]", prev):
                 continue
-            if key not in T:
+            if key not in lookup:
                 missing.add(key)
                 continue
-            translate_paragraph(p, s, T[key])
+            translate_paragraph(p, s, lookup[key])
             done += 1
         assert not missing, sorted(missing)
+        set_latin_font(tree)
+        spaced = set_table_spacing(tree)
+        print(f"{fixed} source corrections, {spaced} table paragraphs set to exact 10 pt")
         xml = etree.tostring(tree, xml_declaration=True, encoding="UTF-8", standalone=True)
         OUT.parent.mkdir(exist_ok=True)
         with zipfile.ZipFile(OUT, "w") as zout:
