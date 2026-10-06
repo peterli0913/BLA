@@ -53,7 +53,7 @@ TERMS = {
     "搪瓷搅拌罐、500L": "Glass-lined agitated tank, 500 L",
     "搪瓷反应釜、2000L": "Glass-lined reactor, 2000 L",
     "哈氏合金多肽固相合成仪、2000L": "Hastelloy solid-phase peptide synthesizer, 2000 L",
-    "316L激活釜、1000L": "316L activation reactor, 1000 L",
+    "316L激活釜、1000L": "316L activation tank, 1000 L",
     "哈氏合金压滤罐、DN900": "Hastelloy pressure filter, DN900",
     "白钢搅拌罐、3000L": "Stainless steel agitated tank, 3000 L",
     "哈氏合金反应釜、8000L": "Hastelloy reactor, 8000 L",
