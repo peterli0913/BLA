@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""English versions of 超滤设备改造.pptx and 超滤设备改造-压.xlsx (139788 step3 UF gap assessment).
+"""English versions of 超滤设备改造.pptx and 超滤设备改造-压.xlsx (139788 step3 TFF gap assessment).
 
 PPTX: all text and tables become English in Times New Roman; pictures are untouched. On slides 4-5 the
 embedded P&ID (OLE) is left as is; only its red numbered retrofit notes are covered with a white-filled
@@ -37,7 +37,7 @@ CJK = re.compile(r"[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]")
 
 # ================================================================ PPTX
 TITLES = {
-    1: "Gap Identification – Ultrafiltration",
+    1: "Gap Identification – TFF",
     2: "Category 3 Piping and Equipment Requirements",
     3: "Category 4 Piping and Equipment Requirements",
     4: "P&ID before Retrofit – Tank Section",
@@ -161,7 +161,7 @@ CELLS = {
     "不符合项\n需要将储罐整体更换为满足BPE需求储罐;\n物料单独进;\n储罐增加在线CIP清洗，满足清洁需求。": [
         "Non-compliance:", "Replace the entire tank with a BPE-compliant tank;", "Separate inlet for each material;",
         "Add in-line CIP to the tank to meet cleaning needs."],
-    "TFF\n超滤主体": ["TFF", "UF Skid"],
+    "TFF\n超滤主体": ["TFF", "TFF Skid"],
     "隔膜阀": ["Diaphragm valves"],
     "不锈钢、合金": ["Stainless steel, alloy"],
     "隔膜阀或其他可在位清洗阀门，禁止使用球阀": [CIP_VALVES],
@@ -194,7 +194,7 @@ CELLS = {
     "符合": ["Compliant"],
     "改造管路满足3D标准，使用CIP进行在线清洁": ["Retrofitted piping meets 3D; cleaned in place by CIP", ""],
     "TJ4S-1211-TFF02-T01   →\nTJ4S-1211-TFF02\n甲醇和制备组分加入超滤": [
-        "TJ4S-1211-TFF02-T01   →    ", "TJ4S-1211-TFF02", "Methanol and Prep Fraction Feed to UF"],
+        "TJ4S-1211-TFF02-T01   →    ", "TJ4S-1211-TFF02", "Methanol and Prep Fraction Feed to TFF"],
     "不符合，管路无低点排净，过滤器无低点排净": ["Non-compliant: no low-point drain on piping or filter"],
     "增加低点排净口；\n过滤器增加进液排净口": ["Add a low-point drain;", "Add an inlet drain to the filter", ""],
 }
@@ -371,7 +371,7 @@ STRINGS = {
     "仪表是否符合要求": "Instrument Compliance",
     "文件资料": "Documentation",
     "风险评估": "Risk Assessment",
-    "超滤": "UF",
+    "超滤": "TFF",
     "暂存罐": "Hold Tank",
     "不符合\n需要将储罐更换为满足BPE需求储罐;\n物料单独进;\n储罐增加在线CIP清洗;":
         "Non-compliant\nReplace the tank with a BPE-compliant tank;\nSeparate inlet for each material;\n"

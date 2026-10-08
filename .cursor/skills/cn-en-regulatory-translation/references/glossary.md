@@ -90,6 +90,7 @@
 | 中文 | English | 备注 |
 |---|---|---|
 | 三合一 | agitated filter dryer (AFD) | 用户指定。不要写成 three-in-one。首次出现：AFD（agitated filter dryer）；后文 AFD。客户若写 ANFD（agitated Nutsche filter dryer）可并存，对外默认 AFD |
+| 超滤 | TFF | 用户指定。本项目不译成 ultrafiltration 或 UF。TFF = tangential flow filtration；首次出现可写 TFF（tangential flow filtration），后文 TFF |
 
 ## 会议与项目管理（对外稿）
 
