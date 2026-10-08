@@ -28,10 +28,7 @@ from build_139788_retrofit_v2_en import (  # noqa: E402
 )
 
 ROOT = Path(__file__).resolve().parents[1]
-PPT_SRC = ROOT / "超滤设备改造.pptx"
-PPT_OUT = ROOT / "deliverables" / "超滤设备改造_EN.pptx"
-XLS_SRC = ROOT / "超滤设备改造-压.xlsx"
-XLS_OUT = ROOT / "deliverables" / "超滤设备改造_EN.xlsx"
+OUT_DIR = ROOT / "deliverables"
 
 CJK = re.compile(r"[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]")
 
@@ -43,6 +40,8 @@ TITLES = {
     4: "P&ID before Retrofit – Tank Section",
     5: "P&ID after Retrofit – Tank Section",
     6: "Category 4 Tank Requirements",
+    7: "Category 3 Piping Requirements",
+    8: "Category 4 Piping Requirements",
 }
 
 FINISH = "Internal surface finish: NMT 25 µin Ra or 0.63 µm"
@@ -186,6 +185,8 @@ CELLS = {
     "无不可排净的流量计": ["No non-drainable flowmeters"],
     "1.管路材质为BPE，符合要求\n2.表面抛光度为出厂标准，符合要求\n\n\n详情见附件": [
         "1. Piping material is BPE, compliant;", "2. " + FINISH_OK, "", "", "See attachment for details"],
+    "1.管路材质为BPE，符合要求\n\n\n详情见附件": [
+        "1. Piping material is BPE, compliant;", "", "", "See attachment for details"],
     "TJ4S-1211-HPPC03-AT03\n→\nTJ4S-1211-TFF02-T01\n制备组分加入储罐": [
         "TJ4S-1211-HPPC03-AT03   ", "→ ", " TJ4S-1211-TFF02-T01", "Prep Fraction Feed to Tank"],
     "符合要求，BPE": ["Compliant, BPE"],
@@ -198,10 +199,10 @@ CELLS = {
     "不符合，管路无低点排净，过滤器无低点排净": ["Non-compliant: no low-point drain on piping or filter"],
     "增加低点排净口；\n过滤器增加进液排净口": ["Add a low-point drain;", "Add an inlet drain to the filter", ""],
 }
-# (slide, row, col) -> font size (pt) where the English needs a smaller size to keep the source row heights
+# cell text -> font size (pt) where the English needs a smaller size to keep the source row heights
 CELL_SIZE = {
-    (6, 2, 10): 8,
-    (8, 4, 9): 8,
+    "不符合项\n需要将储罐整体更换为满足BPE需求储罐;\n物料单独进;\n储罐增加在线CIP清洗，满足清洁需求。": 8,
+    "不符合，管路无低点排净，过滤器无低点排净": 8,
 }
 
 # ---- slides 4-5: red numbered notes inside the embedded P&ID
@@ -214,13 +215,21 @@ NOTES = [
     "6. Change the dip-tube thermometer to bottom-outlet measurement;",
     "7. Modify the tank bottom outlet valve.",
 ]
-# slide -> (x0, y0, x1, y1) in pt covering the Chinese notes, font pt, line pitch pt (= source pitch, so the
-# CAD leader lines still end at the same note)
-NOTE_BOX = {
-    4: ((726, 95.5, 956, 224), 8, 17.2),
-    5: ((681, 81, 956, 188), 8.5, 14.6),
-}
 NOTE_RED = RGBColor(0xFF, 0x00, 0x00)
+
+# Each version: (pptx source, xlsx source, output suffix, note boxes).
+# Note box: slide -> (x0, y0, x1, y1) in pt covering the Chinese notes, font pt, line pitch pt (= source pitch,
+# so the CAD leader lines still end at the same note). The P&ID objects were rescaled in the 1008 update.
+VERSIONS = [
+    ("超滤设备改造.pptx", "超滤设备改造-压.xlsx", "", {
+        4: ((726, 95.5, 956, 224), 8, 17.2),
+        5: ((681, 81, 956, 188), 8.5, 14.6),
+    }),
+    ("超滤设备改造-1008.pptx", "超滤设备改造-1008.xlsx", "_1008", {
+        4: ((704, 74.2, 956, 226), 8.5, 20.45),
+        5: ((689, 78, 956, 192), 8.5, 15.67),
+    }),
+]
 
 
 def para_text(p):
@@ -273,7 +282,7 @@ def translate_table(n, table, missing):
             key = cell_text(cell)
             if CJK.search(key):
                 if key in CELLS:
-                    fill_cell(cell._tc.txBody, CELLS[key], CELL_SIZE.get((n, r, c)))
+                    fill_cell(cell._tc.txBody, CELLS[key], CELL_SIZE.get(key))
                 else:
                     missing.append((n, r, c, key))
     times_new_roman(table._tbl)
@@ -287,8 +296,8 @@ def translate_slide_title(shape, text):
     translate_title(shape, text)
 
 
-def add_notes(slide, n):
-    (x0, y0, x1, y1), size, pitch = NOTE_BOX[n]
+def add_notes(slide, box):
+    (x0, y0, x1, y1), size, pitch = box
     for note in NOTES:
         assert text_width_pt(note, size, bold=False) < x1 - x0 - 4, note
     shp = add_label(slide, Emu(int(Pt(x0))), Emu(int(Pt(y0))), Emu(int(Pt(x1))), Emu(int(Pt(y1))),
@@ -301,8 +310,8 @@ def add_notes(slide, n):
             run.font.color.rgb = NOTE_RED
 
 
-def build_pptx():
-    prs = Presentation(PPT_SRC)
+def build_pptx(src, out, note_box):
+    prs = Presentation(src)
     missing = []
     for n, slide in enumerate(prs.slides, 1):
         for shape in list(slide.shapes):
@@ -313,15 +322,15 @@ def build_pptx():
                     translate_slide_title(shape, TITLES[n])
             elif shape.has_table:
                 translate_table(n, shape.table, missing)
-        if n in NOTE_BOX:
-            add_notes(slide, n)
+        if n in note_box:
+            add_notes(slide, note_box[n])
     assert not missing, "\n".join(map(str, missing))
     for slide in prs.slides:
         for shape in slide.shapes:
             if shape.has_text_frame:
                 assert not CJK.search(shape.text_frame.text), shape.text_frame.text
-    prs.save(PPT_OUT)
-    print(PPT_OUT.relative_to(ROOT))
+    prs.save(out)
+    print(out.relative_to(ROOT))
 
 
 # ================================================================ XLSX
@@ -333,6 +342,7 @@ DRAIN_FILTER = "Line filter body: add a drain point;"
 N2_PURGE = "Solvent line purged with N2, no in-line CIP;"
 DL_3D = "3D design to minimize residual dead legs;"
 PUMP = "Pneumatic pump: drains before/after pump, N2 purge;"
+ANGLED_DV = "Diaphragm valve, angled to avoid product hold-up"
 GRAVITY = "1. Add a line low point for gravity drainage;\n2. " + DRAIN_FILTER
 
 STRINGS = {
@@ -410,6 +420,13 @@ STRINGS = {
         "diaphragm valves",
     "符合，有视镜灯": "Compliant, sight-glass light provided",
     "储罐有下搅拌\n": "Tank has a bottom-mounted agitator\n",
+    "储罐为焊接下搅拌，符合要求\n": "Tank has a welded bottom-mounted agitator, compliant\n",
+    "阀门类型及坡度排查项": "Valve Type and Slope Check",
+    "阀门类型（隔膜阀是否有角度）": "Valve Type (diaphragm valve installation angle)",
+    "隔膜阀，角度不易存料": ANGLED_DV,
+    "隔膜阀，阀门角度不易存料": ANGLED_DV,
+    "过滤器排查项": "Filter Check",
+    "过滤器": "Filter",
     "工序": "Process Step",
     "管路起始": "Line From",
     "管路结束": "Line To",
@@ -509,8 +526,8 @@ def drop_chinese(si):
     last.text = last.text.rstrip()
 
 
-def build_xlsx():
-    zin = zipfile.ZipFile(XLS_SRC)
+def build_xlsx(src, out):
+    zin = zipfile.ZipFile(src)
     sst = etree.fromstring(zin.read("xl/sharedStrings.xml"))
     missing = []
     for si in sst.findall(M + "si"):
@@ -523,8 +540,9 @@ def build_xlsx():
             drop_chinese(si)
         else:
             missing.append(text)
+            continue
         assert not CJK.search(si_text(si)), si_text(si)
-    assert not missing, missing
+    assert not missing, "\n".join(map(repr, missing))
     for rfont in sst.iter(M + "rFont"):
         if rfont.get("val") in CJK_FONTS:
             rfont.set("val", FONT)
@@ -542,12 +560,13 @@ def build_xlsx():
         "xl/sharedStrings.xml": etree.tostring(sst, xml_declaration=True, encoding="UTF-8", standalone=True),
         "xl/styles.xml": etree.tostring(styles, xml_declaration=True, encoding="UTF-8", standalone=True),
     }
-    with zipfile.ZipFile(XLS_OUT, "w", zipfile.ZIP_DEFLATED) as zout:
+    with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as zout:
         for item in zin.infolist():
             zout.writestr(item, new.get(item.filename, zin.read(item.filename)))
-    print(XLS_OUT.relative_to(ROOT))
+    print(out.relative_to(ROOT))
 
 
 if __name__ == "__main__":
-    build_pptx()
-    build_xlsx()
+    for ppt_src, xls_src, suffix, note_box in VERSIONS:
+        build_pptx(ROOT / ppt_src, OUT_DIR / f"超滤设备改造_EN{suffix}.pptx", note_box)
+        build_xlsx(ROOT / xls_src, OUT_DIR / f"超滤设备改造_EN{suffix}.xlsx")
