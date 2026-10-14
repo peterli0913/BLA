@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Internal minutes of the 10/14/2026 Lilly on-site wrap-up (useful content through 00:14:21)."""
 
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -13,6 +14,7 @@ from build_lilly_call_script import (
 )
 
 OUT = Path("/workspace/meetings/2026/2026-10-14-礼来客户会会议纪要.docx")
+ROOT_COPY = Path("/workspace/2026-10-14-礼来客户会会议纪要.docx")
 
 SUMMARY = [
     "今天和现场三位礼来把在审文件过了一遍。只是描述性修改的，由礼来回去催 feedback、关闭 comment；有实质问题的，今天当场讨论。今晚仍要看 Yiwen、Sonia 是否还有新 comment，有的话明天继续在现场谈。",
@@ -290,7 +292,9 @@ def build():
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     doc.save(OUT)
+    shutil.copy(OUT, ROOT_COPY)
     print(OUT)
+    print(ROOT_COPY)
 
 
 if __name__ == "__main__":
