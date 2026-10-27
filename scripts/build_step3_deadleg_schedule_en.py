@@ -175,20 +175,28 @@ def main():
     # Option 1
     s = new_slide(prs)
     title(s, "Option 1: procedural control by November 5, 2026.")
-    add_text(s, "The piping stays as it is. The control is how the line is used and cleaned.", 0.55, 1.28, 12, 0.32, 15, False, MUTED)
-    rect(s, 0.55, 1.8, 6.0, 3.35, CARD, LINE)
-    rect(s, 6.75, 1.8, 6.05, 3.35, CARD, LINE)
-    add_text(s, "WHAT REMAINS", 0.78, 1.98, 5.5, 0.28, 12, True, TEAL)
+    add_text(s, "The piping stays as it is. The control is how the line is used and cleaned.", 0.55, 1.18, 12, 0.28, 15, False, MUTED)
+    rect(s, 0.55, 1.55, 12.25, 1.22, RGBColor(0xF8, 0xEE, 0xEE), RGBColor(0xE4, 0xC8, 0xC8))
+    add_text(s, "POTENTIAL RISK", 0.75, 1.64, 4, 0.22, 12, True, RGBColor(0x8C, 0x3A, 0x3A))
+    add_text(
+        s,
+        "Hold-up in the piping can degrade the material, support microbial growth, or cause cross-contamination. "
+        "The flush, drain, purge, and disassembly required after each use are not defined.",
+        0.75, 1.9, 11.85, 0.72, 15, False, INK,
+    )
+    rect(s, 0.55, 2.95, 6.0, 2.2, CARD, LINE)
+    rect(s, 6.75, 2.95, 6.05, 2.2, CARD, LINE)
+    add_text(s, "WHAT REMAINS", 0.78, 3.08, 5.5, 0.24, 12, True, TEAL)
     add_lines(s, [
         "Some piping does not meet the 2D/3D dead-leg criterion.",
         "Some diaphragm valves do not meet the self-draining requirement.",
         "Some piping is not ASME BPE piping.",
-    ], 0.78, 2.4, 5.5, 2.4, 15, INK, 10)
-    add_text(s, "WHAT WE WILL ADD", 6.98, 1.98, 5.5, 0.28, 12, True, TEAL)
+    ], 0.78, 3.38, 5.5, 1.6, 14, INK, 6)
+    add_text(s, "WHAT WE WILL ADD", 6.98, 3.08, 5.5, 0.24, 12, True, TEAL)
     add_lines(s, [
         "After each system transfer, flush or clean with process solvent. Bioburden data support this step.",
-        "Write the flush, drain, purge, and disassembly requirements into the operating and cleaning procedures.",
-    ], 6.98, 2.4, 5.55, 2.4, 15, INK, 10)
+        "Write the flush, drain, purge, and disassembly requirements into the procedures.",
+    ], 6.98, 3.38, 5.55, 1.6, 14, INK, 6)
     rect(s, 0.55, 5.35, 8.35, 1.45, WHITE, LINE)
     rect(s, 9.05, 5.35, 3.75, 1.45, NAVY)
     add_text(s, "RESIDUAL RISK", 0.78, 5.5, 3, 0.25, 12, True, TEAL)
@@ -247,10 +255,106 @@ def main():
     add_lines(s, ["5 months after", "Option 2"], 9.28, 5.78, 3.3, 0.85, 18, WHITE, 0, True)
     footer(s, 5, total)
 
+    one = one_page()
+    outs = OUTS + [
+        ROOT / "deliverables" / "pptx" / "2026-10-27-client-139788-step3-deadleg-holdup-1page.pptx",
+        ROOT / "139788 Step 3 Dead-leg and Hold-up Retrofit_EN_1page.pptx",
+    ]
+    # first two paths are the five-slide deck
     for path in OUTS:
         path.parent.mkdir(parents=True, exist_ok=True)
         prs.save(path)
         print(path)
+    for path in outs[2:]:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        one.save(path)
+        print(path)
+
+
+def one_page():
+    prs = Presentation()
+    prs.slide_width = W
+    prs.slide_height = H
+    prs.core_properties.title = "139788 Step 3 Dead-leg and Hold-up Retrofit — one page"
+    prs.core_properties.author = "Asymchem"
+    s = prs.slides.add_slide(prs.slide_layouts[6])
+    rect(s, 0, 0, 13.333, 7.5, WHITE)
+    header_bar(s)
+    add_text(s, "139788 Step 3 — Dead-leg and hold-up retrofit", 0.38, 0.16, 9.2, 0.36, 20, True, NAVY)
+    add_text(s, "Demo: Option 1    Pre-PPQ and PPQ: Option 2    Commercial: Option 3", 0.38, 0.52, 9.4, 0.26, 12, False, MUTED)
+    add_text(s, "All four steps handle process material.", 9.6, 0.52, 3.4, 0.26, 12, False, MUTED, PP_ALIGN.RIGHT)
+
+    options = [
+        ["Option", "What it covers", "Potential risk", "Mitigation", "After mitigation", "Due"],
+        [
+            "1",
+            "Dead legs outside the 2D/3D criterion, diaphragm valves that are not self-draining, and non-BPE piping stay in place.",
+            "Hold-up can degrade material, support microbial growth, or cause cross-contamination. Flush, drain, purge, and disassembly after each use are not defined.",
+            "After each system transfer, flush or clean with process solvent, supported by bioburden data. Define those steps in the procedures.",
+            "Low",
+            "Nov 5, 2026",
+        ],
+        [
+            "2",
+            "Rebuild piping and vessels with hygienic T-valves and 3D short-outlet tees. Control dead legs, slope, and drainability. Reserve CIP tie-in valves.",
+            "New change control, with a concern for product quality. Pre-use and post-use steps may still be insufficient.",
+            "Qualify the modified piping. Define the operating and cleaning sequence and update the records.",
+            "Low",
+            "Feb 6, 2027",
+        ],
+        [
+            "3",
+            "Add clean-in-place on the Option 2 piping, including slope, drainage, dead-leg removal, and pre-use flush, cleaning, disinfection, and purge.",
+            "The design may be incomplete, and the CIP sequence and controls may be incomplete.",
+            "Qualify the system as a whole. Update the SOP and bring the requirements into routine use.",
+            "Low",
+            "5 months after Option 2",
+        ],
+    ]
+    table = s.shapes.add_table(4, 6, Inches(0.32), Inches(0.88), Inches(12.7), Inches(4.55)).table
+    for i, w in enumerate([0.85, 2.85, 3.15, 3.15, 1.15, 1.55]):
+        table.columns[i].width = Inches(w)
+    table.rows[0].height = Inches(0.36)
+    for r in range(1, 4):
+        table.rows[r].height = Inches(1.38)
+    for r, row in enumerate(options):
+        for c, val in enumerate(row):
+            if r == 0:
+                fill, color, bold, size = NAVY, WHITE, True, 11
+            elif c == 0:
+                fill, color, bold, size = TEAL, WHITE, True, 16
+            elif c == 4:
+                fill, color, bold, size = RGBColor(0xE8, 0xF2, 0xEA), LOW, True, 12
+            else:
+                fill, color, bold, size = WHITE if r % 2 else CARD, INK, False, 11
+            style_cell(table.cell(r, c), val, size, bold, color, fill, PP_ALIGN.CENTER if c in (0, 4, 5) else PP_ALIGN.LEFT)
+
+    phase = [
+        ["Process step", "Demo", "Pre-PPQ", "PPQ", "Commercial"],
+        ["Preparative buffer preparation", "Option 1", "Option 2", "Option 2", "Option 3"],
+        ["Preparative chromatography", "Option 1", "Option 2", "Option 2", "Option 3"],
+        ["TFF", "Option 1", "Option 2", "Option 2", "Option 3"],
+        ["Precipitation", "Option 1", "Option 2", "Option 2", "Option 3"],
+    ]
+    t2 = s.shapes.add_table(5, 5, Inches(0.32), Inches(5.48), Inches(12.7), Inches(1.62)).table
+    for i, w in enumerate([3.9, 2.2, 2.2, 2.2, 2.2]):
+        t2.columns[i].width = Inches(w)
+    for r, row in enumerate(phase):
+        t2.rows[r].height = Inches(0.32)
+        for c, val in enumerate(row):
+            if r == 0:
+                fill, color, bold = NAVY, WHITE, True
+            elif c == 0:
+                fill, color, bold = CARD, NAVY, True
+            elif val == "Option 1":
+                fill, color, bold = RGBColor(0xE7, 0xF3, 0xF3), TEAL, True
+            elif val == "Option 3":
+                fill, color, bold = RGBColor(0xE8, 0xF2, 0xEA), LOW, True
+            else:
+                fill, color, bold = WHITE, INK, True
+            style_cell(t2.cell(r, c), val, 11, bold, color, fill, PP_ALIGN.LEFT if c == 0 else PP_ALIGN.CENTER)
+    add_text(s, "139788 Step 3  ·  Dead-leg and hold-up retrofit", 0.32, 7.2, 8, 0.22, 10, color=MUTED)
+    return prs
 
 
 if __name__ == "__main__":
