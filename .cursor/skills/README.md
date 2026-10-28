@@ -13,6 +13,7 @@
 | `internal-comms` | 内部周报、FAQ、3P 更新（Anthropic, Apache-2.0） |
 | `theme-factory` | PPT/文档配色主题（Anthropic, Apache-2.0） |
 | `doc-coauthoring` | 长文档共创（Anthropic, 示例技能） |
+| `annotating-cmc-drafts` | PVP / MOR / ESA / GA / 参数表的硬伤清单和三方核对 Excel；`GROK-PROMPT.md` 可直接粘给 Grok |
 
 ## 本机文档技能（不进 Git）
 
