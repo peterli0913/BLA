@@ -218,7 +218,7 @@ PVP_ROWS = [
     ("第 2 节范围", "against CPPs and CQAs", "第 9 节写明 Step 1 不制定 CQA。改为 against CPPs and IPCs。"),
     ("第 3 节策略", "release specifications", "ASYM-141366 没有放行标准。改为 meets its IPC acceptance criteria and is suitable for forward processing。"),
     ("第 5 节职责最后一句", "The personals who are executing", "personals 改为 personnel；“shall be attached report”改为“shall be attached to the report”。"),
-    ("第 6 节 Table 4 下的注", "calculated based on the input range and the expected yield range", "产量范围 105.63–278.62 kg 不是投料 × 收率，而是 MOR 的公式：理论产量 = 树脂量 + 树脂量 × 取代度 × 2787.03 ÷ 1000，再乘 60%–130%。反推取代度约 0.96–1.24 mmol/g。注里应写明取代度这一计算基准；请确认 0.96–1.24 是否就是 2-CTC 质量标准的范围。句末还有一个多余的“.”。"),
+    ("第 6 节 Table 4 下的注", "calculated based on the input range and the expected yield range", "产量按 MOR 公式计算：理论产量 = 树脂量 + 树脂量 × 取代度 × 2787.03 ÷ 1000，再乘 60%–130%。MOR 写明 2-CTC 取代度标准为 1.0–1.2 mmol/g，据此产量应为 108.84–271.66 kg；105.63–278.62 kg 对应取代度约 0.96–1.24，超出标准。请按 MOR 一起改，并在注里写明取代度这一计算基准。句末还有一个多余的“.”。"),
     ("第 6 节批次策略段", "Fragment 2 PPQ batch strategy", "Fragment 2 应为 Fragment L2；commercialscale 应为 commercial-scale；“three … batches is based” 主谓不一致。同段用 master batch records (MBRs)，全文其他地方用 MOR，请统一。"),
     ("第 7 节首段", "fit for process requirement", "“<RA-140020030101.01> Equipment selection” 之间缺句号，同一个 RA 号在一句话里引用两次，删一处即可。"),
     ("第 8 节首段", "RPT- 1194035", "引用残缺：“<Refer to RPT- 1194035 (Lilly document number) -and form”。改为 (Lilly PAR report RPT-1194035) and forms the basis。"),
