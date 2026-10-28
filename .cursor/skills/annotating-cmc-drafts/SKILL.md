@@ -1,6 +1,6 @@
 ---
 name: annotating-cmc-drafts
-description: Use when reviewing a PPQ protocol (PVP), MOR, ESA, ORA, gap assessment, or process-parameter workbook for 批注, 硬伤, inconsistencies, mistranslation, or typos; when cross-checking that PVP, parameter workbook, and MOR parameters match (三方核对); or when producing a 硬伤清单 / 批注清单 Excel.
+description: Use when reviewing a PPQ protocol (PVP), MOR, ESA, ORA, CVP, cleaning method (CMa/CMb), gap assessment, or process-parameter workbook for 批注, 硬伤, inconsistencies, mistranslation, or typos; when cross-checking that PVP, parameter workbook, and MOR parameters match (三方核对); or when producing a 硬伤清单 / 批注清单 Excel.
 ---
 
 # 审 CMC 草稿，出硬伤 Excel
