@@ -9,7 +9,7 @@ description: Use when reviewing a PPQ protocol (PVP), MOR, ESA, ORA, CVP, cleani
 
 ## 流程
 
-1. 用 `scripts/docx_lines.py <文件>` 取接受修订后的文本（含表格、页眉页脚）。先读版本说明，再和上一版做差，再读批注。客户按邮箱认：`@lilly.com`、`@network.lilly.com`。
+1. 用 `scripts/docx_lines.py <文件>` 取接受修订后的文本（含表格、页眉页脚）。先读版本说明，再和上一版做差，再读批注。小数位要搜改前和改后两种写法：4 V 与 4.0 V、25 ℃ 与 25.0 ℃、2.0 eq 与 2.00 eq。只改了一处、别处还留着少一位或多一位的，要报。客户按邮箱认：`@lilly.com`、`@network.lilly.com`。
 2. 按 [references/check-logic.md](references/check-logic.md) 核对。依据顺序是 PAR / PFD → 参数表 → PVP → MOR。里面有三方核对的步骤、MOR / PVP / ESA / GA 的检查清单、报与不报的界线和交付前自查。
 3. 审 MOR 时先跑 `scripts/mor_auto_checks.py <MOR.docx> --resin <树脂kg>`，得到候选清单，逐条人工判断后再写入。
 4. 审 L2 Step 1 时读 [references/l2-step1-project-facts.md](references/l2-step1-project-facts.md)：已锁定的数、文件号、密度和待用户确认的问题。用户答复后更新这份文件。
