@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Print the accepted text of a .docx (or the cells of a .xlsx) one searchable line per row.
+"""Print the accepted text of a .docx, the cells of a .xlsx, or the text lines of a .pdf.
 
 A "line" is one Word paragraph (body, table cell, header, footer, footnote) with tracked
 deletions dropped and insertions kept, i.e. what Word's Find sees after Accept All.
@@ -76,9 +76,26 @@ def xlsx_lines(path):
     return out
 
 
+def pdf_lines(path):
+    import pymupdf
+
+    doc = pymupdf.open(path)
+    out = []
+    for i, page in enumerate(doc):
+        for j, line in enumerate(page.get_text("text").splitlines()):
+            if line.strip():
+                out.append(Line(f"p{i + 1}", j, line))
+    return out
+
+
 def lines(path):
     path = Path(path)
-    return xlsx_lines(path) if path.suffix.lower() in (".xlsx", ".xlsm") else docx_lines(path)
+    suf = path.suffix.lower()
+    if suf in (".xlsx", ".xlsm"):
+        return xlsx_lines(path)
+    if suf == ".pdf":
+        return pdf_lines(path)
+    return docx_lines(path)
 
 
 def main():
