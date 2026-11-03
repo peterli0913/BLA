@@ -14,6 +14,7 @@
 | `theme-factory` | PPT/文档配色主题（Anthropic, Apache-2.0） |
 | `doc-coauthoring` | 长文档共创（Anthropic, 示例技能） |
 | `annotating-cmc-drafts` | PVP / MOR / ESA / GA / 参数表的硬伤清单和三方核对 Excel；`GROK-PROMPT.md` 可直接粘给 Grok |
+| `duty_report_skill` | 值班交接。近期定下的审文件口径、中英对照工艺表做法、还不能自己定的数 |
 
 ## 本机文档技能（不进 Git）
 
