@@ -42,7 +42,7 @@
 - Val 前和第二个 Leu 前的再溶胀 10.0 V / 9.48 kg/kg。
 - 偶联温度 NOR 按氨基酸分：标准 AA（含 Orn11）20–27 °C；Phe23、Asn21 19–28 °C；NMeAsn22、αMePhe15 19–27 °C。MOR 统一写 20–30 °C 是错的。
 - 溶解夹套温度是 CPP，NOR 15–25 °C；MOR 溶解阶段还没有控温和记录点。
-- 20% 哌啶/DMF 10.4 V（不要改回 10.39 V 或 11.4 V），单位是 kg/kg。
+- 20% 哌啶/DMF 10.4 V（不要改回 10.39 V 或 11.4 V），单位是 kg/kg。`0020工艺.docx` 仍写 10.39 V, 9.68 kg，并且 Asn 氯冉酸阳性是 blue to back；11-03 PVP 已是 10.4 V, 9.68 kg/kg 和 blue to black。
 - 写法：αMePhe（不是 aMePhe），Fmoc-L-α-Me-Phe-OH，2-chlorotrityl。
 - 封端液釜 TJ4S-1213-R22；Oxyma 溶液 TJ4S-1200-AT02；氯冉酸方法 AM-140020-030。
 - Ac₂O 封端后直接向合成釜（Sy15）加 DMF 洗涤，是 MOR 版本说明里的有意改动，不是错误。

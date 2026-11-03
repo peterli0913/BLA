@@ -75,6 +75,7 @@ MOR 一般写明“本记录以中文为准”，所以中英数字不一致必�
 - 文件号前后一致：PAR 报告号、稳定性方案号、变更号、下一步产物号；章节和表格的交叉引用指向正确。
 - 范围与策略：没有放行标准的中间体不写 CQA / release specification。
 - IPC 判据与方法一致（茚三酮阴性为 yellow to light pink，不是 colorless）。
+- 同一股物料写了两次 Transfer the mixture、且第二次在通氮气并开搅拌之后，要报。氯冉酸或茚三酮放行句停在 and then，或停在 If the color is lighter，要报。10.39 V 或 9.68 kg（缺 /kg）相对锁定的 10.4 V、9.68 kg/kg 是回退，要报。
 - 方法表不能是空表而正文在引用。
 - 供应商地址写到城市、省和国家，与 Table 2、VMP 一致。
 - 被误改的段落：公司名、产品句被改坏。
