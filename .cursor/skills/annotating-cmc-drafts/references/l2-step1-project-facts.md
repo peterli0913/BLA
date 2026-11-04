@@ -16,6 +16,7 @@
 | 稳定性方案 | PSP-140020-2026-003.01（第 15 节曾写 -002.01） |
 | 本步产物 | ASYM-141366（树脂上肽，无放行标准，不定 CQA；Step 1 只有 CPP 和 IPC） |
 | 同系列模板 | 0021 项目 GA（`Gap Assessment … LSN4182928_ASYM-140021 …`）；L3 PVP PDF 作样式参考 |
+| 差距评估最新稿 | `L2 GA-140020-0301.01_11-04-2026.2.docx`。10-28 已改掉的不要再报：has prepared、Step 1 的 CPV 编号、IPAc 的 ppm、CMa-Movable、The updated analytical。这一稿仍把 AM-140020-032 写成已验证，Step 2 验证编号仍有 CPPQ |
 
 ## 客户
 
