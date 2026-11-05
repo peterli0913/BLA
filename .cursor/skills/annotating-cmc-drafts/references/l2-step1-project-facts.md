@@ -11,10 +11,10 @@
 | 参数表 | `工艺参数范围_10-28-2026.xlsx`（Sheet1，客户 PAR / PFD 转来，定了 NOR） |
 | 风险评估 | 本份 ORA 是 RA-140020030102.01（`L2 step1 ORA- RA-140020030102.01-10-28-2026.docx`）。文中把 RA-140020030101.01 称为 ESA，把 RA-140020030103.01 称为交叉污染风险评估 |
 | PAR 报告（礼来） | RPT-1194035（正文曾写成 RPT-1190340，两号数字换位） |
-| 清洁验证方案 | CVP-1400200301.01。最新稿在 `L2CVP-10-28-2026-new/`。拆卸大清洁和项目结束是 CMa-TJ414002001.01，批次间冲洗是 CMb-TJ414002001.01。上一轮已改掉的不要再报：sight glass 与 U-bend 已分开，泵号 TJ4S-1200-PDP040，CMa 的 1evel，CMb 的 he/drain to，124852 批次间淋洗已改成与 CVP 相同的 0.00867–0.00950 mg/mL |
+| 清洁验证方案 | CVP-1400200301.01。最新稿 `L2 Step1 CVP-1400200301.01-11-05-2026.docx`，对照模板是 L3 PDF `Cleaning Validation Protocol of ASYM-140851_L3_Step1_CVP-1400210301.01.pdf`。10 月稿在 `L2CVP-10-28-2026-new/`。拆卸大清洁和项目结束是 CMa-TJ414002001，批次间冲洗是 CMb-TJ414002001。上一轮已改掉的不要再报：sight glass 与 U-bend 已分开，泵号 TJ4S-1200-PDP040，CMa 的 1evel，CMb 的 he/drain to |
 | 工艺验证总方案 | VP-14002001.01 |
 | 稳定性方案 | PSP-140020-2026-003.01（第 15 节曾写 -002.01） |
-| 本步产物 | ASYM-141366（树脂上肽，无放行标准，不定 CQA；Step 1 只有 CPP 和 IPC） |
+| 本步产物 | Step 1 产物 ASYM-141366（树脂上肽，无放行标准，不定 CQA；Step 1 只有 CPP 和 IPC）。Step 2 产物 ASYM-140020。2026-11-05 用户确认：不要把 Step 1 的生产对象写成 ASYM-140020，也不要留下模板代码 ASYM-140851 |
 | 同系列模板 | 0021 项目 GA（`Gap Assessment … LSN4182928_ASYM-140021 …`）；L3 PVP PDF 作样式参考 |
 | 差距评估最新稿 | `L2 GA-140020-0301.01_11-04-2026.2.docx`。10-28 已改掉的不要再报：has prepared、Step 1 的 CPV 编号、IPAc 的 ppm、CMa-Movable、The updated analytical。这一稿仍把 AM-140020-032 写成已验证，Step 2 验证编号仍有 CPPQ |
 
@@ -46,6 +46,7 @@
 - 20% 哌啶/DMF 10.4 V（不要改回 10.39 V 或 11.4 V），单位是 kg/kg。`0020工艺.docx` 仍写 10.39 V, 9.68 kg，并且 Asn 氯冉酸阳性是 blue to back；11-03 PVP 已是 10.4 V, 9.68 kg/kg 和 blue to black。
 - 写法：αMePhe（不是 aMePhe），Fmoc-L-α-Me-Phe-OH，2-chlorotrityl。
 - 封端液釜 TJ4S-1213-R22；Oxyma 溶液 TJ4S-1200-AT02；氯冉酸方法 AM-140020-030。
+- 2026-11-05 用户确认：3000 L 固相釜取样淋洗是 DMF 245–255 kg（260–270 L），不要改回 L3 模板的 105–115 kg（111–121 L）。本步氨基酸一共 12 个；CVP 写成 10 个是错的。
 - Ac₂O 封端后直接向合成釜（Sy15）加 DMF 洗涤，是 MOR 版本说明里的有意改动，不是错误。
 
 ## 待用户确认（10-28 三方核对后提出，答复前不要自行定数）
