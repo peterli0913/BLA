@@ -1,0 +1,71 @@
+# L2 Step 1 项目事实（截至 2026-10-28）
+
+只在审 L2（ASYM-140020 / LSN4182924，Eloralintide Fragment L2）Step 1 文件时用。别的项目只借方法，不借数。
+
+## 文件与编号
+
+| 项 | 编号 |
+|---|---|
+| PPQ 方案 | PVP-1400200301.01（最新稿 `L2 Step1 PVP-1400200301.01_-11-03-2026.3.docx`）。10-29 的 aMe 全局替换还留着 parαMeters、NαMe、sαMe；pentamethyl、9.68 kg/kg、1.0 V 的中文逗号已改回。这一稿把标准脱保护改成 100–140 min，活化改成 20±15 min |
+| MOR | MOR-TJ414002001.04（`MOR_10282026.docx`） |
+| 参数表 | `工艺参数范围_10-28-2026.xlsx`（Sheet1，客户 PAR / PFD 转来，定了 NOR） |
+| 风险评估 | 本份 ORA 是 RA-140020030102.01（`L2 step1 ORA- RA-140020030102.01-10-28-2026.docx`）。文中把 RA-140020030101.01 称为 ESA，把 RA-140020030103.01 称为交叉污染风险评估 |
+| PAR 报告（礼来） | RPT-1194035（正文曾写成 RPT-1190340，两号数字换位） |
+| 清洁验证方案 | CVP-1400200301.01。最新稿 `L2 Step1 CVP-1400200301.01-11-05-2026.docx`，对照模板是 L3 PDF `Cleaning Validation Protocol of ASYM-140851_L3_Step1_CVP-1400210301.01.pdf`。10 月稿在 `L2CVP-10-28-2026-new/`。拆卸大清洁和项目结束是 CMa-TJ414002001，批次间冲洗是 CMb-TJ414002001。上一轮已改掉的不要再报：sight glass 与 U-bend 已分开，泵号 TJ4S-1200-PDP040，CMa 的 1evel，CMb 的 he/drain to |
+| 工艺验证总方案 | VP-14002001.01 |
+| 稳定性方案 | PSP-140020-2026-003.01（第 15 节曾写 -002.01） |
+| 本步产物 | Step 1 产物 ASYM-141366（树脂上肽，无放行标准，不定 CQA；Step 1 只有 CPP 和 IPC）。Step 2 产物 ASYM-140020。2026-11-05 用户确认：不要把 Step 1 的生产对象写成 ASYM-140020，也不要留下模板代码 ASYM-140851 |
+| 同系列模板 | 0021 项目 GA（`Gap Assessment … LSN4182928_ASYM-140021 …`）；L3 PVP PDF 作样式参考 |
+| 差距评估最新稿 | `L2 GA-140020-0301.01_11-04-2026.2.docx`。10-28 已改掉的不要再报：has prepared、Step 1 的 CPV 编号、IPAc 的 ppm、CMa-Movable、The updated analytical。这一稿仍把 AM-140020-032 写成已验证，Step 2 验证编号仍有 CPPQ |
+
+## 客户
+
+礼来：Johan Granander、Yiwen Zhang（yiwen.zhang@lilly.com，中文名但是客户）。凡 `@lilly.com`、`@network.lilly.com` 都是客户。
+
+## 换算基础
+
+| 项 | 值 |
+|---|---|
+| 树脂（2-CTC）投料 | 48.00 kg（称量 47.90–48.10 kg） |
+| 密度 g/mL | DMF 0.948；IPAc 0.873；甲苯 0.872；MTBE 0.741；20% 哌啶/DMF 0.931 |
+| 参数表 NOR | 多为目标 ±5%，个别 ±4% |
+| MOR 称量范围 | 目标 ±3%；1 V 冲洗 ±2 kg |
+| MOR 理论产量 | 树脂 + 树脂 × 取代度 × 2787.03 / 1000，乘以收率 60–130% |
+| 取代度标准 | 1.0–1.2 mmol/g，产量范围 108.84–271.66 kg |
+
+产量范围的三个版本互相矛盾：MOR 页脚 105.63–278.62 kg，版本说明 145.12–271.65 kg，按公式和取代度标准算是 108.84–271.66 kg。
+
+## 终版 PVP 已锁定的值（10-27 终版）
+
+- 11-03 稿用户确认的调整：活化时间改为 20±15 min；原来的 20±5°C 改为 15–25°C；IPC 的阴性/阳性判定写明颜色；部分偶联温度目标改为 23°C。这四项本身不再当成错误。标准 De-Fmoc 在该稿写成 100–140 min，用户未说明，仍要核对。
+- Asn21 封端后 DMF 洗涤 8.0 V / 7.58 kg/kg。
+- 脱保护后及 10 次 IPAc 洗涤 10.0 V / 8.73 kg/kg（MOR 部分步骤是 10.64 V / 9.29 kg/kg，见待确认第 1 条）。
+- Val 前和第二个 Leu 前的再溶胀 10.0 V / 9.48 kg/kg。
+- 偶联温度 NOR 按氨基酸分：标准 AA（含 Orn11）20–27 °C；Phe23、Asn21 19–28 °C；NMeAsn22、αMePhe15 19–27 °C。MOR 统一写 20–30 °C 是错的。
+- 溶解夹套温度是 CPP，NOR 15–25 °C；MOR 溶解阶段还没有控温和记录点。
+- 20% 哌啶/DMF 10.4 V（不要改回 10.39 V 或 11.4 V），单位是 kg/kg。`0020工艺.docx` 仍写 10.39 V, 9.68 kg，并且 Asn 氯冉酸阳性是 blue to back；11-03 PVP 已是 10.4 V, 9.68 kg/kg 和 blue to black。
+- 写法：αMePhe（不是 aMePhe），Fmoc-L-α-Me-Phe-OH，2-chlorotrityl。
+- 封端液釜 TJ4S-1213-R22；Oxyma 溶液 TJ4S-1200-AT02；氯冉酸方法 AM-140020-030。
+- 2026-11-05 用户确认：3000 L 固相釜取样淋洗是 DMF 245–255 kg（260–270 L），不要改回 L3 模板的 105–115 kg（111–121 L）。本步氨基酸一共 12 个；CVP 写成 10 个是错的。
+- 2026-11-06 Step 2 PAR：Excel 汇总是 `Step2-PAR.xlsx`，Word 汇总是 `Step 2 PAR 汇总--11-06-2026.docx`。原始记录在 `L2 Step 2 Process/`。实测以每个 Run 模板 “L2 Cleavage PAR Template” 的 Actual Value 列为准；设计表 “L2 Cleavage PAR Design - Values” 的 Value @ row 指明该参数取哪一行。新 Excel 的 NaCl Run 10–12 与原始记录一致（约 1.002 / 0.856 / 1.002 w/w）。旧 `Step2-PAR-汇总.xlsx` 写成 30 / 30 / 720，技术总结已按旧汇总改过，不要再把 30/30/720 当成原始记录。Run 13 裂解液原始记录是 364.41 g、乙酸乙酯 349.58 g、TFA 4.07 w/w。Excel 汇总写成 464.41 g、449.58 g、3.193 w/w；Word 汇总的 TFA 已是 4.07。技术总结是否从 3.19 改回，等用户确认。
+- Ac₂O 封端后直接向合成釜（Sy15）加 DMF 洗涤，是 MOR 版本说明里的有意改动，不是错误。
+
+## 待用户确认（10-28 三方核对后提出，答复前不要自行定数）
+
+1. 脱保护后 IPAc 按参数表和 PVP 的 10.0 V / 8.73 kg/kg（NOR 8.38–9.08），还是按 MOR 的 10.64 V / 9.29 kg/kg（NOR 432.54–459.30 kg）？
+2. MOR 的 ★NOR 是否必须与 PVP 表 7 完全一致？目前 DIPEA、封端 DMF、Pre-Ser20 时间都是 MOR 更窄。
+3. Orn11 后的甲苯/MTBE 次序和次数，以 PVP 和参数表为准，还是以 MOR 3.47 为准？
+4. 1.0 V / 2.0 V DMF 冲洗写 0.95 / 1.90 kg/kg，还是参数表的 0.94 / 1.89？
+5. 预处理 DMF：MOR 的 200–300 kg，还是参数表 250.08 kg ± 5%？
+6. DIC 加料温度、20% 哌啶溶液温度是不是 CPP（MOR 标 ★CPP，PVP 没有）？
+7. 参数表第 31–33 行 “DMF post-coupling wash (9.0 v)” 是否对应 MOR 3.4.6？
+8. 参数表第 56 行 Phe23 “DMF charge (1.0 v)” 对应 MOR 3.6.7 还是 3.7.3？
+9. 参数表第 406–411 行后三行对应 MOR 3.47.9–3.47.11，还是 IPC 不合格时的 3.48.1–3.48.3？
+
+用户答复后，把结论写进上面“已锁定的值”，并从这里删掉。
+
+## 已交付的核对结果（可作格式样例）
+
+- `L2-Step1-PVP-参数表-MOR-三方核对_10-28-2026.xlsx`（生成脚本 `scripts/build_l2_step1_param_crosscheck.py`）
+- `L2-Step1-MOR-硬伤清单_10-28-2026.xlsx`（56 行：25 高 / 18 中 / 13 低；生成脚本 `scripts/build_l2_step1_mor_review.py`）
+- `L2-Step1-PVP-final1-硬伤清单.xlsx`、`L2-GA-140020-0301.01.3-硬伤清单.xlsx`、`L2-Step1-ESA-10-27-HH-批注清单.xlsx`
