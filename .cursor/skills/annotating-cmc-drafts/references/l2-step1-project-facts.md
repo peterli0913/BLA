@@ -13,6 +13,7 @@
 | PAR 报告（礼来） | RPT-1194035（正文曾写成 RPT-1190340，两号数字换位） |
 | 清洁验证方案 | CVP-1400200301.01。最新稿 `L2 Step1 CVP-1400200301.01-11-05-2026.docx`，对照模板是 L3 PDF `Cleaning Validation Protocol of ASYM-140851_L3_Step1_CVP-1400210301.01.pdf`。10 月稿在 `L2CVP-10-28-2026-new/`。拆卸大清洁和项目结束是 CMa-TJ414002001，批次间冲洗是 CMb-TJ414002001。上一轮已改掉的不要再报：sight glass 与 U-bend 已分开，泵号 TJ4S-1200-PDP040，CMa 的 1evel，CMb 的 he/drain to |
 | 工艺验证总方案 | VP-14002001.01 |
+| Excel 投料计算表确认方案 | Excel-VP-14002001.01（`Qualification Protocol for L2_Excel-VP-14002001.01_10-26-2026-clean.docx`）。这不是工艺验证总方案。封面和正文用 Excel-VP-14002001.01；Appendix D 页眉写成 Excel-VP-1400200301.01 |
 | 稳定性方案 | PSP-140020-2026-003.01（第 15 节曾写 -002.01） |
 | 本步产物 | Step 1 产物 ASYM-141366（树脂上肽，无放行标准，不定 CQA；Step 1 只有 CPP 和 IPC）。Step 2 产物 ASYM-140020。2026-11-05 用户确认：不要把 Step 1 的生产对象写成 ASYM-140020，也不要留下模板代码 ASYM-140851 |
 | 同系列模板 | 0021 项目 GA（`Gap Assessment … LSN4182928_ASYM-140021 …`）；L3 PVP PDF 作样式参考 |
