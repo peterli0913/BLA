@@ -1,0 +1,8 @@
+This directory includes third-party Agent Skills from https://github.com/anthropics/skills
+
+- skills/internal-comms — Copyright 2026 Anthropic, PBC. Apache License 2.0.
+- skills/theme-factory — Copyright 2026 Anthropic, PBC. Apache License 2.0.
+- skills/doc-coauthoring — Copyright Anthropic, PBC. Distributed as an example skill in the same repository.
+
+See each skill's LICENSE.txt where provided.
+The Anthropic document skills (pptx, pdf, docx, xlsx) are proprietary and are not included in this repository.
